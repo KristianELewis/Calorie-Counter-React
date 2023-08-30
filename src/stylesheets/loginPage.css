@@ -1,0 +1,21 @@
+
+.loginPage {
+    margin : auto;
+    padding : 25px;
+    min-width: 300px;
+}
+
+
+.loginInputs {
+    display: flex;
+    flex-direction :column;
+    padding-top : 25px;
+    padding-bottom : 25px;
+}
+
+.loginButtons {
+    padding-top : 20px;
+    display: flex;
+    flex-direction : row;
+    justify-content: space-between;
+}

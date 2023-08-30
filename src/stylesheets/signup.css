@@ -1,0 +1,20 @@
+
+.signupPage {
+    margin : auto;
+    padding : 25px;
+    min-width: 300px;
+}
+
+
+.signupInputs {
+    display: flex;
+    flex-direction :column;
+    padding-top : 25px;
+}
+
+.signupButtons {
+    padding-top : 20px;
+    display: flex;
+    flex-direction : row;
+    justify-content: space-between;
+}

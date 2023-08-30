@@ -1,0 +1,37 @@
+
+/*is it bad practice to have so many flex stuff?*/
+
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 25px;
+    border-right : black solid 2px;
+    width: 50%;
+
+}
+
+.topUserInfo {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom : 20px;
+
+}
+
+.bottomUserInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.userIdentity {
+    margin-left : 20px;
+}
+
+.UserButtons {
+    display : flex;
+    flex-direction: row;
+    margin-top : 20px;
+    justify-content: space-between;
+}
