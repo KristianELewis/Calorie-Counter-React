@@ -36,7 +36,7 @@ const LoginPage = (props) => {
         }
         const handleLogin = () => {
             setAlerted({error: false, errorType:"none"});
-            props.loginstuff(username, password)
+            props.userLogin_(username, password)
         }
 
         const handleSignup = () => {
