@@ -68,9 +68,12 @@ async function serverErrorDecider(res){
     }
 }
 
+const hostURL = "http://localhost:3000"
+
+
 export async function handleDelete (loggedID, userID, token, dispatch){
 
-    const path = `http://localhost:3000/user/${userID}/logged-food/${loggedID}`
+    const path = hostURL + `/user/${userID}/logged-food/${loggedID}`
 
     return fetch(path, {
         method: "DELETE",
@@ -101,7 +104,7 @@ used in BackdropBase.jsx
 
 export async function handleUpdate (loggedID, amount, userID, token, dispatch) {
 
-    const path = `http://localhost:3000/user/${userID}/logged-food/${loggedID}`
+    const path = hostURL + `/user/${userID}/logged-food/${loggedID}`
 
     return fetch(path, {
         method: "PATCH",
@@ -131,7 +134,7 @@ used in ServerItemForm.jsx
 export async function addMealItemServerFunc (userID, meal, foodItemID, amount, curDate, token) {
     
     const date = dayjs(curDate).format('YYYY-MM-DD')
-    const path = `http://localhost:3000/user/${userID}/date/${date}/new-item`
+    const path = hostURL + `/user/${userID}/date/${date}/new-item`
 
 	return (
 		fetch(path, {
@@ -166,7 +169,7 @@ used in Day.jsx
 export async function loadDay (userID, curDate, token) {
    
     const date = dayjs(curDate).format('YYYY-MM-DD')
-    const path = `http://localhost:3000/user/${userID}/date/${date}`
+    const path = hostURL + `/user/${userID}/date/${date}`
   
     return (
         fetch(path, {
@@ -201,7 +204,7 @@ name should change, confused with AddMealItemServerFunc
 
 export async function addNewFoodItemConnect (name, calories, carbs, fat, protein) {
     
-     return fetch("http://localhost:3000/database-food/new-item", {
+     return fetch(hostURL + "/database-food/new-item", {
         method: "POST",
         body: JSON.stringify({
             name: name,
@@ -232,7 +235,7 @@ used in ServerItemForm.jsx
 ------------------------------------------------------------------------------------*/
 export async function serverSearch (searchBoxText) {
 
-    const path = `http://localhost:3000/database-food/${searchBoxText}`
+    const path = hostURL + `/database-food/${searchBoxText}`
 
     return (fetch(path, {
         method: "GET",
@@ -257,7 +260,7 @@ different the SearchResult poor naming, should change
 export async function changeResultsPage(searchQuery, page) {
 
     const startingPoint = 5 * (page - 1);
-    const path = `http://localhost:3000/database-food/${searchQuery}/p${startingPoint}`
+    const path = hostURL + `/database-food/${searchQuery}/p${startingPoint}`
 
     return (fetch(path, {
         method: "GET",
@@ -287,7 +290,7 @@ used in SignUpPage.jsx
 ------------------------------------------------------------------------------------*/
 
 export async function signUp (userData) {
-    return (fetch("http://localhost:3000/signup", {
+    return (fetch(hostURL + "/signup", {
         method: "POST",
         body: JSON.stringify({
             userData : userData
@@ -308,7 +311,7 @@ used in App.jsx
 export async function userLogin (username, password) {
 
 	return (
-		fetch("http://localhost:3000/login", {
+		fetch(hostURL + "/login", {
 		method: "POST",
 		body: JSON.stringify({
 			username: username,
@@ -324,7 +327,7 @@ export async function userLogin (username, password) {
 
 export async function tokenLoginS (userID, token) {
     return (
-		fetch(`http://localhost:3000/login/token/${userID}`, {
+		fetch(hostURL + `/login/token/${userID}`, {
 		method: "POST",
 			headers: {
 			"Content-type": "application/json; charset=UTF-8",
@@ -344,7 +347,7 @@ export async function getProfilePicture(userID, profilePicture){
     //unecessary use of userID.profilePicture
     //also limits the ability for this to be a generic function for getting user profile pictures
     //needs to be removed, just check if the user has uploaded a profile picture
-    return fetch(`http://localhost:3000/user/${userID}/profile-picture/${profilePicture}`, {
+    return fetch(hostURL + `/user/${userID}/profile-picture/${profilePicture}`, {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -366,7 +369,7 @@ used in EditUser.jsx
 ------------------------------------------------------------------------------------*/
 export async function handleUpdateUserInfo (userData, token) {
 
-    return fetch(`http://localhost:3000/user/${userData.userID}/user-info`, {
+    return fetch(hostURL + `/user/${userData.userID}/user-info`, {
         method: "PATCH",
         body: JSON.stringify({
             userData : userData
@@ -395,7 +398,7 @@ export async function uploadNewProfilePicture (userID, file, token) {
     let formData = new FormData();
     formData.append('file', file)
 
-    return fetch(`http://localhost:3000/user/${userID}/upload-profile-picture`, {
+    return fetch(hostURL + `/user/${userID}/upload-profile-picture`, {
         method: "PATCH",
         body : formData,
           headers: {
