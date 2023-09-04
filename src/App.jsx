@@ -2,9 +2,11 @@
 
 TODO
 
+OVERALL
+-I should think about an alternative to the ternary exressions used to decide what is being displayed
+
 
 LOGIN FUNCTIONALITY
-
 -Both login and signup functionality needs to use the newer error handling
 -userLogin_ and userLogin need to have more easily distinguished names
   -userLogin should be renamed to something more akin to userLoginServer, something that signifies that it connects to the server
@@ -23,7 +25,7 @@ import './App.css'
 
 import Day from './components/day';
 import LoginPage from './components/LoginPage';
-
+import InfoPage from './components/InfoPage';
 
 //needed for materui themes and styling
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -97,6 +99,13 @@ const App = () => {
     //used to display an alert if username/password are incorrect
     const [alerted, setAlerted] = useState({error: false, errorType:"none"});
 
+    const [infoPage, setInfoPage] = useState(true);
+
+
+    const handleInfoPage = () => {
+        setInfoPage(false);
+    }
+
     useEffect(() => {
         //if there is a token in the cookies try logging in
         //Not happy with this try catch
@@ -122,27 +131,33 @@ const App = () => {
         setUserData(result.userData)
     }
 
+
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            { !isLoggedIn ? 
-            (<LoginPage 
-                userLogin_ = {handleLoginStatus} 
-                alerted = {alerted} 
-                setAlerted = {setAlerted}
-            />) 
-            : 
-            <div className='main-container'>
-                <Day 
-                    userID={userID}
-                    userData = {userData} 
-                    setUserData = {setUserData} 
-                    setUserID = {setUserID}
-                    setIsLoggedIn = {setIsLoggedIn}
-                    setAlerted = {setAlerted}
+                {infoPage ? 
+                <InfoPage
+                    handleInfoPage= {handleInfoPage}
                 />
-            </div>
-            }
+                :
+                    (!isLoggedIn ? 
+                    (<LoginPage 
+                        userLogin_ = {handleLoginStatus} 
+                        alerted = {alerted} 
+                        setAlerted = {setAlerted}
+                    />) 
+                    : 
+                    <div className='main-container'>
+                        <Day 
+                            userID={userID}
+                            userData = {userData} 
+                            setUserData = {setUserData} 
+                            setUserID = {setUserID}
+                            setIsLoggedIn = {setIsLoggedIn}
+                            setAlerted = {setAlerted}
+                        />
+                    </div>)
+                }
         
         </ThemeProvider>
     )
