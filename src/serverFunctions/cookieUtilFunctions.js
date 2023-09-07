@@ -2,9 +2,11 @@
 TODO
 
 should make cookies more secure
-http only mode and the like
+-secure
+-httponly
 
-
+Need to change the expiration to something longer
+    -also need to change the expiration for the jwt on the server side
 */
 
 //not sure if all of this cookie validation is really necessary
@@ -40,8 +42,8 @@ export const getCookies = () => {
 
 //userID may switch to user name
 export const setCookies = (token, userID) => {
-    let tokenCookie = `token=${token}; max-age=3600`
-    let userIDCookie = `userID=${userID}; max-age=3600`
+    let tokenCookie = `token=${token}; max-age=86400`
+    let userIDCookie = `userID=${userID}; max-age=86400`
 
     document.cookie = tokenCookie
     document.cookie = userIDCookie
