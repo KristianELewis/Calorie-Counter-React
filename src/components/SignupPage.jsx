@@ -52,27 +52,35 @@ const SignupPage = (props) => {
             setSignup(false);
         }
 
+
+        //checks if there is white space
+        //  /\s/ is regular expression for white space
+        function hasWhiteSpace(str) {
+            return /\s/.test(str);
+        }
+
+
         //not sure if there is a better way to user input vallidation
         //there is also serverside validation
         const userValidation = () => {
-            if (username === ""){
-                setSignupError({isError : true, errorType : "No username sent 1"})
+            if (username === "" || hasWhiteSpace(username)){
+                setSignupError({isError : true, errorType : "Invalid Username 1"})
                 return true;
             }
-            else if(password === ""){
-                setSignupError({isError : true, errorType : "No password sent 1"})
+            else if(password === "" || hasWhiteSpace(password)){
+                setSignupError({isError : true, errorType : "Invalid Password 1"})
                 return true;
             }
             else if(name === ""){
-                setSignupError({isError : true, errorType : "No name sent 1"})
+                setSignupError({isError : true, errorType : "No Name Sent 1"})
                 return true;
             }
-            else if(age === 0){
-                setSignupError({isError : true, errorType : "No age sent 1"})
+            else if(age < 1 || isNaN(age)){
+                setSignupError({isError : true, errorType : "Invalid Age 1"})
                 return true;
             }
-            else if(weight === 0){
-                setSignupError({isError : true, errorType : "No weight sent 1"})
+            else if(weight < 1 || isNaN(weight)){
+                setSignupError({isError : true, errorType : "Invalid Weight 1"})
                 return true;
             }
             return false;
