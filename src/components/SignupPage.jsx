@@ -64,23 +64,23 @@ const SignupPage = (props) => {
         //there is also serverside validation
         const userValidation = () => {
             if (username === "" || hasWhiteSpace(username)){
-                setSignupError({isError : true, errorType : "Invalid Username 1"})
+                setSignupError({isError : true, errorType : "Invalid Username"})
                 return true;
             }
             else if(password === "" || hasWhiteSpace(password)){
-                setSignupError({isError : true, errorType : "Invalid Password 1"})
+                setSignupError({isError : true, errorType : "Invalid Password"})
                 return true;
             }
             else if(name === ""){
-                setSignupError({isError : true, errorType : "No Name Sent 1"})
+                setSignupError({isError : true, errorType : "No Name Sent"})
                 return true;
             }
             else if(age < 1 || isNaN(age)){
-                setSignupError({isError : true, errorType : "Invalid Age 1"})
+                setSignupError({isError : true, errorType : "Invalid Age"})
                 return true;
             }
             else if(weight < 1 || isNaN(weight)){
-                setSignupError({isError : true, errorType : "Invalid Weight 1"})
+                setSignupError({isError : true, errorType : "Invalid Weight"})
                 return true;
             }
             return false;
@@ -118,7 +118,7 @@ const SignupPage = (props) => {
 
     return(
         <Card className = "signupPage">
-            <h3>Calorie Calculator</h3>
+            <h3>Calorie Counter</h3>
             <h3>Signup</h3>
             <div className = "signupInputs">            
                 <TextField 

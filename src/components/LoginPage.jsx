@@ -50,7 +50,7 @@ const LoginPage = (props) => {
                 <SignupPage setSignup = {setSignup}/>
                 :
                 <Card className = "loginPage">
-                <h3>Calorie Calculator</h3>
+                <h3>Calorie Counter</h3>
                 <h3>Login</h3>
                 <div className = "loginInputs">            
                     <TextField onChange = {handleUsernameChange} required id = "username" label="Username" size="small"/>
