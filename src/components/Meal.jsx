@@ -48,7 +48,7 @@ const Meal = (props) => {
     const handleOpenAdd = () => {
         dispatchBackdrop({type: "ADDITEM", dispatch : props.dispatch, meal : props.meal.meal})
     }
-
+    
 
     return (
         <Paper className = "meal">
@@ -57,6 +57,7 @@ const Meal = (props) => {
                     <TableHead>
                         <TableRow>
                             <TableCell>{props.meal.name}</TableCell>
+                            <TableCell align="right">Serving size</TableCell>
                             <TableCell align="right">Calories</TableCell>
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
@@ -78,6 +79,7 @@ const Meal = (props) => {
                     <TableFooter>
                         <TableRow>
                             <TableCell>Totals</TableCell>
+                            <TableCell align="right"></TableCell>
                             <TableCell align="right">{totals.calories}</TableCell>
                             <TableCell align="right">{totals.fat}</TableCell>
                             <TableCell align="right">{totals.carbs}</TableCell>

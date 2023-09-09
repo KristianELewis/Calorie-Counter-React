@@ -64,6 +64,8 @@ const SearchItemForm = (props) => {
                 meal: props.meal, 
                 amount : amount, 
                 loggedID : res.loggedID, 
+                servingSize : result.servingSize,
+                servingUnit : result.servingUnit,
                 calories : result.calories, 
                 carbs : result.carbs, 
                 fat : result.fat, 

@@ -36,6 +36,7 @@ const SearchResults = (props) => {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="right">Calories</TableCell>
+                            <TableCell align="right">Serving Size</TableCell>
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                             <TableCell align="right">Protein&nbsp;(g)</TableCell>

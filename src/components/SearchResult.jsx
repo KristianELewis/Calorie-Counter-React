@@ -32,6 +32,7 @@ const SearchResult = (props) => {
         <TableRow className = "searchFoodItemResults">
             <TableCell>{result.name}</TableCell>
             <TableCell align="right">{result.calories}</TableCell>
+            <TableCell align="right">{result.servingSize} {result.servingUnit}</TableCell>
             <TableCell align="right">{result.fat}</TableCell>
             <TableCell align="right">{result.carbs}</TableCell>
             <TableCell align="right">{result.protein}</TableCell>

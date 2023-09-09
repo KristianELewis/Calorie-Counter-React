@@ -20,6 +20,7 @@ const MealItem = (props) => {
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell component="th" scope="mealItem"> {mealItem.name}</TableCell>
+            <TableCell align="right">{mealItem.servingSize} {mealItem.servingUnit}</TableCell>
             <TableCell align="right">{mealItem.calories * mealItem.amount}</TableCell>
             <TableCell align="right">{mealItem.fat * mealItem.amount}</TableCell>
             <TableCell align="right">{mealItem.carbs * mealItem.amount}</TableCell>
