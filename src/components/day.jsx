@@ -135,6 +135,12 @@ const Day = (props) => {
             setErrorAlert({error: true, errorType: error.message})
             return 
         }
+        else if(error instanceof NoProfilePicture)
+        {
+            //This isn't actually an error
+            //its probably not a good way of dealing with this
+            return
+        }
         else if(error instanceof ServerSideError)
         {
             setErrorAlert({error: true, errorType: error.message})

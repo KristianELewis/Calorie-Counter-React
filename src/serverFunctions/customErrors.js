@@ -22,6 +22,16 @@ export class ServerSideError extends Error {
     }
 }
 
+export class NoProfilePicture extends Error {
+    //This is probably not a good way of dealing with this
+    constructor(message)
+    {
+        super(message)
+        this.name = "NoProfilePicture"
+    }
+}
+
+
 export class UnknownError extends Error {
     constructor(message)
     {

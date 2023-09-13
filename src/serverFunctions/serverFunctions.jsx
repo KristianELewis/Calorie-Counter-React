@@ -38,7 +38,7 @@ used in BackdropBase.jsx
 import dayjs from 'dayjs';
 
 
-import {NotFoundError, AuthError, ServerSideError, UnknownError} from './customErrors'
+import {NotFoundError, AuthError, ServerSideError, UnknownError, NoProfilePicture} from './customErrors'
 //should this be in the custom errors file instead?
 async function serverErrorDecider(res){
     //all status codes should come with a message
@@ -57,6 +57,11 @@ async function serverErrorDecider(res){
     else if(res.status === 404)
     {
         throw new NotFoundError(errMessage)
+    }
+    else if (res.status === 418)
+    {
+        //not a good way of dealing with this, No profile picture error
+        throw new NoProfilePicture(errMessage)
     }
     else if(res.status === 500)
     {
