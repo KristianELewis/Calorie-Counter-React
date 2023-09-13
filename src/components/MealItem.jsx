@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 const MealItem = (props) => {
         
     const mealItem = props.mealItem;
-    
+
     const handleOpen = () => {
         props.handleOpen(mealItem.loggedID)
     }
@@ -19,12 +19,18 @@ const MealItem = (props) => {
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
-            <TableCell component="th" scope="mealItem"> {mealItem.name}</TableCell>
+            {/*
+            
+            not sure if there is a better way to do this, this will give a max decimal length of 2, but without always having 0s and no scientific notation
+            parseFloat((mealItem.calories * .amount).toFixed(2))
+
+            */}
+            <TableCell component="th" scope="mealItem" className ="mealItemName" style={{width: '200px'}}> {mealItem.name}</TableCell>
             <TableCell align="right">{mealItem.servingSize} {mealItem.servingUnit}</TableCell>
-            <TableCell align="right">{mealItem.calories * mealItem.amount}</TableCell>
-            <TableCell align="right">{mealItem.fat * mealItem.amount}</TableCell>
-            <TableCell align="right">{mealItem.carbs * mealItem.amount}</TableCell>
-            <TableCell align="right">{mealItem.protein * mealItem.amount}</TableCell>
+            <TableCell align="right">{parseFloat((mealItem.calories * mealItem.amount).toFixed(2))}</TableCell>
+            <TableCell align="right">{parseFloat((mealItem.fat * mealItem.amount).toFixed(2))}</TableCell>
+            <TableCell align="right">{parseFloat((mealItem.carbs * mealItem.amount).toFixed(2))}</TableCell>
+            <TableCell align="right">{parseFloat((mealItem.protein * mealItem.amount).toFixed(2))}</TableCell>
             <TableCell align="right">{mealItem.amount}</TableCell>
             <TableCell align="right">
                 <Button onClick = {handleOpen}>UPDATE</Button>

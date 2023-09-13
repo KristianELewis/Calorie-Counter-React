@@ -56,7 +56,7 @@ const Meal = (props) => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>{props.meal.name}</TableCell>
+                            <TableCell style={{width: '200px'}} >{props.meal.name}</TableCell>
                             <TableCell align="right">Serving size</TableCell>
                             <TableCell align="right">Calories</TableCell>
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
@@ -80,10 +80,10 @@ const Meal = (props) => {
                         <TableRow>
                             <TableCell>Totals</TableCell>
                             <TableCell align="right"></TableCell>
-                            <TableCell align="right">{totals.calories}</TableCell>
-                            <TableCell align="right">{totals.fat}</TableCell>
-                            <TableCell align="right">{totals.carbs}</TableCell>
-                            <TableCell align="right">{totals.protein}</TableCell>
+                            <TableCell align="right">{parseFloat((totals.calories).toFixed(2))}</TableCell>
+                            <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
+                            <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
+                            <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
                             <TableCell align="right"></TableCell>
                             <TableCell align="right"></TableCell>
                             <TableCell align="right">

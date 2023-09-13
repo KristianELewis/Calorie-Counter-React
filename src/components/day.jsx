@@ -297,10 +297,10 @@ const Day = (props) => {
                     <h2>Daily Totals</h2>
                     <div className ="totalsDisplay">
                         <div>
-                            <p>Calories: {totals.calories}</p>
-                            <p>Carbs: {totals.carbs}</p>
-                            <p>Fat: {totals.fat}</p>
-                            <p>Protein: {totals.protein}</p>
+                            <p>Calories: {parseFloat((totals.calories).toFixed(2))}</p>
+                            <p>Carbs: {parseFloat((totals.carbs).toFixed(2))}</p>
+                            <p>Fat: {parseFloat((totals.fat).toFixed(2))}</p>
+                            <p>Protein: {parseFloat((totals.protein).toFixed(2))}</p>
 
                         </div>
                         <div className ="chartContainer">
