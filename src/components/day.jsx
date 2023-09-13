@@ -6,23 +6,13 @@ TODO
 
 Overall
 
--Finally upload to git hub
-    -redo npm init for server
-    -make sure .gitignore is correct
 
 -server functions
     -all server functions should handle serverside errors
     -if token expires, then server functions should logout with some standard code (think this is done already)
-    -remove the 1s from signup validation
     -login functions all need to be reviewed
 
 -profile picture stuff should be switched to useRef
--change fetch urls
-
--need some actual food data from the usda or something
-
--get working on aws
--changed server fetch urls
 
 Eventually -more involved things-
 
@@ -37,7 +27,6 @@ Eventually -more involved things-
 -clicking on individual food items should open up an expanded version that shows all of the nutritional information
 
 Eventually -less involved things-
--need serving sizes
 -enter at the login page should just count as login
 -not allow quantites less than 1 in adding food items
 -login should handle empty username or password better. Currently says inccorect username or password
