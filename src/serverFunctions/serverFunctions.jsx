@@ -207,12 +207,13 @@ used in AddFoodItem.jsx
 name should change, confused with AddMealItemServerFunc
 ------------------------------------------------------------------------------------*/
 
-export async function addNewFoodItemConnect (name, servingSize, servingUnit, calories, carbs, fat, protein) {
+export async function addNewFoodItemConnect (name, brandName, servingSize, servingUnit, calories, carbs, fat, protein) {
     
      return fetch(hostURL + "/database-food/new-item", {
         method: "POST",
         body: JSON.stringify({
             name: name,
+            brandName: brandName,
             servingSize : servingSize,
             servingUnit : servingUnit,
             calories: calories,

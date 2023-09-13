@@ -17,6 +17,7 @@ const AddFoodItem = (props) => {
     const {open, setOpen, handleServerErrors} = props
 
     const [name, setName] = useState("");
+    const [brandName, setBrandName] = useState("");
     const [servingUnit, setServingUnit] = useState("g");
     const [servingSize, setServingSize] = useState(0);
     const [calories, setCalories] = useState(0);
@@ -30,7 +31,7 @@ const AddFoodItem = (props) => {
  
     const acceptChange = () => {
         //update based on change
-        addNewFoodItemConnect(name, servingSize, servingUnit, calories, carbs, fat, protein)
+        addNewFoodItemConnect(name, brandName, servingSize, servingUnit, calories, carbs, fat, protein)
         .catch(error => handleServerErrors(error))
         handleClose();
     }
@@ -48,7 +49,14 @@ const AddFoodItem = (props) => {
                         className = "AddFoodItemFieldsTextfield"
                         onChange = {(event) => setName(event.target.value)}
                     />
-                  <TextField 
+                    <TextField 
+                        label = "Brand Name"
+                        value = {brandName} 
+                        margin="normal"
+                        className = "AddFoodItemFieldsTextfield"
+                        onChange = {(event) => setBrandName(event.target.value)}
+                    />
+                    <TextField 
                         label = "Serving Size"
                         value = {servingSize}
                         type = "number"
