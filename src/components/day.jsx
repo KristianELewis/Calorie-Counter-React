@@ -97,7 +97,7 @@ import Alert from '@mui/material/Alert';
 
 //utility functions
 import { loadDay } from "../serverFunctions/serverFunctions";
-import {NotFoundError, AuthError, ServerSideError, UnknownError} from '../serverFunctions/customErrors'
+import {NotFoundError, AuthError, ServerSideError, UnknownError, NoProfilePicture} from '../serverFunctions/customErrors'
 import {removeCookies} from '../serverFunctions/cookieUtilFunctions'
 import '../stylesheets/day.css'
 
