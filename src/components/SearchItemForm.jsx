@@ -19,6 +19,7 @@ import "../stylesheets/searchItemBackdrop.css"
 
 import {serverSearch, addMealItemServerFunc} from "../serverFunctions/serverFunctions";
 import SearchResults from "./SearchResults";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const SearchItemForm = (props) => {
 
@@ -26,7 +27,7 @@ const SearchItemForm = (props) => {
     
     //may not be necessary
     const [hasSearched, setHasSearched] = useState(false)
-
+    const [searchDone, setSearchDone] = useState(false);
 
     const [searchResults, setSearchResults] = useState([]);
     const [searchBoxText, setSearchBoxText] = useState("");
@@ -42,10 +43,11 @@ const SearchItemForm = (props) => {
             //console.log("empty");
         }
         else{
+            setHasSearched(true);
             serverSearch(searchBoxText)
             .then(res => {
                 setSearchResults(res);
-                setHasSearched(true);
+                setSearchDone(true);
             })
             .catch(error => {
                 handleServerErrors(error)
@@ -94,14 +96,17 @@ const SearchItemForm = (props) => {
                     </div> 
                 </>
             :
-                <SearchResults
-                    searchQuery = {searchBoxText}
-                    searchResults = {searchResults}
-                    handleAddMealItem = {handleAddMealItem}
-                    deny = {deny}
-                    setSearchResults = {setSearchResults}
-                    handleServerErrors = {handleServerErrors}
-                    />
+                searchDone ?
+                    <SearchResults
+                        searchQuery = {searchBoxText}
+                        searchResults = {searchResults}
+                        handleAddMealItem = {handleAddMealItem}
+                        deny = {deny}
+                        setSearchResults = {setSearchResults}
+                        handleServerErrors = {handleServerErrors}
+                        />
+                    :
+                    <CircularProgress />
             }
         </Card>
     )

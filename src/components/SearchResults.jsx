@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import SearchResult from "./SearchResult";
 
@@ -13,14 +13,23 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 
 import {changeResultsPage} from '../serverFunctions/serverFunctions'
+
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 const SearchResults = (props) => {
 
+    const [searchDone, setSearchDone] = useState(true)
     const {searchResults, handleAddMealItem, deny, searchQuery, setSearchResults, handleServerErrors} = props;
     const pages = Math.ceil(searchResults[1].count / 5)
 
     const pageChangeHandler = (event, page) => {
+        setSearchDone(false)
         changeResultsPage(searchQuery, page)
-        .then(res => setSearchResults(res))
+        .then(res => {
+            setSearchDone(true);
+            setSearchResults(res)
+        })
         .catch(error => {
             handleServerErrors(error);
             deny();
@@ -30,6 +39,8 @@ const SearchResults = (props) => {
     return (
         <div style={{maxHeight: 600, overflow: 'auto'}}>
             <h2>Search Results</h2>
+            {
+            searchDone ?
             <TableContainer>
                 <Table size="small">
                     <TableHead>
@@ -56,6 +67,11 @@ const SearchResults = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            :
+            <div>
+                <CircularProgress />
+            </div>
+        }
                 <Button onClick = {deny} >Finish Search</Button>
                 <Pagination count={pages} onChange = {pageChangeHandler}/>
 
