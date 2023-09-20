@@ -7,6 +7,8 @@ TODO
     -picture choosing/uploading is error prone a the moment
 -add abilty to change password
 
+-could make sure no negative numbers could be given for age or weight? not super important at the moment, and these might get removed anyway
+
 ========================================================*/
 
 import React, {useState} from "react";

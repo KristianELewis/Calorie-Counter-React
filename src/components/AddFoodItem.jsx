@@ -19,6 +19,7 @@ const AddFoodItem = (props) => {
     const [name, setName] = useState("");
     const [brandName, setBrandName] = useState("");
     const [servingUnit, setServingUnit] = useState("g");
+    //It would probably be nice to have serving sizes that support fractions
     const [servingSize, setServingSize] = useState(0);
     const [calories, setCalories] = useState(0);
     const [carbs, setCarbs] = useState(0);
@@ -62,7 +63,12 @@ const AddFoodItem = (props) => {
                         type = "number"
                         margin="normal"
                         className = "AddFoodItemFieldsTextfield"
-                        onChange = {(event) => setServingSize(event.target.value)} 
+                        onChange = {(event) => {
+                            if(event.target.value >= 0)
+                            {
+                                setServingSize(event.target.value)
+                            }
+                        }} 
                     />
                     <TextField 
                         label = "Serving Unit"
@@ -77,7 +83,12 @@ const AddFoodItem = (props) => {
                         type = "number"
                         margin="normal"
                         className = "AddFoodItemFieldsTextfield"
-                        onChange = {(event) => setCalories(event.target.value)} 
+                        onChange = {(event) => {
+                            if(event.target.value >= 0)
+                            {
+                                setCalories(event.target.value)
+                            }
+                        }} 
                     />
                     <TextField 
                         label = "Carbs"
@@ -85,7 +96,12 @@ const AddFoodItem = (props) => {
                         type = "number"
                         margin="normal"
                         className = "AddFoodItemFieldsTextfield"
-                        onChange = {(event) => setCarbs(event.target.value)} 
+                        onChange = {(event) => {
+                            if(event.target.value >= 0)
+                            {
+                                setCarbs(event.target.value)
+                            } 
+                        }}
                     />
                     <TextField 
                         label = "Fat"
@@ -93,7 +109,12 @@ const AddFoodItem = (props) => {
                         type = "number"
                         margin="normal"
                         className = "AddFoodItemFieldsTextfield"
-                        onChange = {(event) => setFat(event.target.value)} 
+                        onChange = {(event) => {
+                            if(event.target.value >= 0)
+                            {
+                                setFat(event.target.value)
+                            } 
+                        }}
                     />
                     <TextField 
                         label = "Protein"
@@ -101,7 +122,12 @@ const AddFoodItem = (props) => {
                         type = "number"
                         margin="normal"
                         className = "AddFoodItemFieldsTextfield"
-                        onChange = {(event) => setProtein(event.target.value)} 
+                        onChange = {(event) => {
+                            if(event.target.value >= 0)
+                            {
+                                setProtein(event.target.value)
+                            }
+                        }} 
                     />
                 </div>
                 <div className = "addFoodItemButtons">

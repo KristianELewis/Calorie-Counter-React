@@ -14,7 +14,7 @@ const SearchResult = (props) => {
 
     const amountChangeHandler = (event) => {
         const theAmount = parseInt(event.target.value)
-        if(theAmount > 0)
+        if(theAmount >= 0)
         {
             setAmount(theAmount)
         }

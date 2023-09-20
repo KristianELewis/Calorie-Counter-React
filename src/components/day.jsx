@@ -199,6 +199,12 @@ const Day = (props) => {
 
     /*=======================================================================
         LOAD DAILY INFORMATION
+
+        -change this to meal information
+        -If I continue to use meals like this, the meal states should be saved in inside the meals themselves.
+        -Their totals should also be calculated inside the meals themselves.
+        -When a meal changes its totals should be passed up to the day, and then down into a daily totals component
+        -right now they will all be rerendered when anyone of them change(the entirety of the day component will be rerendered)
     ========================================================================*/
 
     function intitializeMeals (list) {
@@ -375,6 +381,5 @@ const Day = (props) => {
             />
         </>
     );
-
 }
 export default Day;

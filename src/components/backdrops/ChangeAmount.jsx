@@ -9,12 +9,12 @@ import "../../stylesheets/changeAmountBackdrop.css"
 
 const ChangeAmount = (props) => {
 
-    const {handleChange, acceptChange, deny, backdropState} = props;
+    const {handleChange, acceptChange, changeAmount, deny, backdropState} = props;
     return(
         <Backdrop open = {backdropState.open}>
             <Card className = "changeAmountBackdrop">
                 <h2>Change Amount</h2>
-                <TextField onChange = {handleChange} type = "number"></TextField>
+                <TextField onChange = {handleChange} type = "number" value = {changeAmount}></TextField>
                 <div className= "changeAmountButtons">
                     <Button onClick = {acceptChange} >Accept</Button>
                     <Button onClick = {deny} >Deny</Button>

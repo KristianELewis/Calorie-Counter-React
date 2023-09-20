@@ -3,6 +3,11 @@
 TODO
 
 OVERALL
+-add react router here. 
+-Remove signin and signup, add them to their own pages
+
+
+OLD TODO LIST
 -I should think about an alternative to the ternary exressions used to decide what is being displayed
 
 

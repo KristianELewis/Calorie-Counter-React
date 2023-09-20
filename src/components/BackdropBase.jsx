@@ -22,11 +22,14 @@ const BackdropBase = (props) => {
 
     const {backdropState, handleServerErrors} = props;
 
+    //I decided on the lowest value being 0 for consitency with SearchResult.jsx
     const [changeAmount, setChangeAmount] = useState(0);
-
     const handleChange = (event) => {
         let amount = parseInt(event.target.value)
-        setChangeAmount(amount);
+        if(amount >= 0)
+        {
+            setChangeAmount(amount);
+        }
     }
 
     //we can use a generic close
@@ -67,6 +70,7 @@ const BackdropBase = (props) => {
                 backdropState = {backdropState}
                 handleChange = {handleChange}
                 acceptChange = {acceptChange}
+                changeAmount = {changeAmount}
                 deny = {deny}
             />
         )
