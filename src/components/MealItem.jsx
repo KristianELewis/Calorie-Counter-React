@@ -1,5 +1,6 @@
 import React from 'react';
 
+//materialUI
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
@@ -18,6 +19,7 @@ const MealItem = (props) => {
         <>
         <TableRow
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            onClick = {handleOpen}
         >
             {/*
             
@@ -32,9 +34,6 @@ const MealItem = (props) => {
             <TableCell align="right">{parseFloat((mealItem.carbs * mealItem.amount).toFixed(2))}</TableCell>
             <TableCell align="right">{parseFloat((mealItem.protein * mealItem.amount).toFixed(2))}</TableCell>
             <TableCell align="right">{mealItem.amount}</TableCell>
-            <TableCell align="right">
-                <Button onClick = {handleOpen}>UPDATE</Button>
-            </TableCell>
             <TableCell align="right">
                 <Button onClick = {handleOpenDelete}>DELETE</Button>
             </TableCell>

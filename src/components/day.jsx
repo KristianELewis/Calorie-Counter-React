@@ -92,7 +92,8 @@ import TotalsChart from './TotalsChart'
 import dayjs from 'dayjs';
 
 //material ui
-import { Paper, Button } from "@mui/material";
+import Paper from '@mui/material/Paper';
+import Button from "@mui/material/Button";
 import Alert from '@mui/material/Alert';
 
 //utility functions

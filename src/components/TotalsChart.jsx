@@ -5,9 +5,14 @@ TODO
 -this is almos completely unchanged from the chartjs example
 -this chart may be unecessary, or there may be a more light weight way of doing this
 
+I am almost sure this can be optomized. I saw something about it on the website when I was adding this
+
+this curently adds 161.21 Kb to the finished project size
+
 */
 
 import React from 'react';
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 

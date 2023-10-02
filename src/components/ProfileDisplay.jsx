@@ -17,12 +17,12 @@ style
 
 import React, {useEffect} from "react";
 
-
-import "../stylesheets/profileDisplay.css"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
 import {getProfilePicture} from '../serverFunctions/serverFunctions'
+
+import "../stylesheets/profileDisplay.css"
 
 const ProfileDisplay = (props) => {
 

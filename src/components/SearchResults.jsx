@@ -1,20 +1,23 @@
 import React, {useState} from "react";
 
-import SearchResult from "./SearchResult";
 
+
+//MaterialUI
 import Pagination from '@mui/material/Pagination';
-import { Button } from "@mui/material";
-
+import Button from "@mui/material/Button";
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import CircularProgress from '@mui/material/CircularProgress';
+
+//Components
+import SearchResult from "./SearchResult";
 
 import {changeResultsPage} from '../serverFunctions/serverFunctions'
 
-import CircularProgress from '@mui/material/CircularProgress';
 
 
 const SearchResults = (props) => {

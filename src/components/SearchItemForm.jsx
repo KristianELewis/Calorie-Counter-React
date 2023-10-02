@@ -10,16 +10,19 @@ TODO
 
 import React, {useState} from "react";
 
-import { TextField, useThemeProps } from "@mui/material";
+//MaterialUI
+import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
-
 import Card from "@mui/material/Card";
+import CircularProgress from '@mui/material/CircularProgress';
+
+//not using this. What was this for?
+//import { useThemeProps } from "@mui/material/styles";
 
 import "../stylesheets/searchItemBackdrop.css"
 
 import {serverSearch, addMealItemServerFunc} from "../serverFunctions/serverFunctions";
 import SearchResults from "./SearchResults";
-import CircularProgress from '@mui/material/CircularProgress';
 
 const SearchItemForm = (props) => {
 

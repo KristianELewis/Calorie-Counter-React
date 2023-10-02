@@ -7,8 +7,10 @@ TODO
 
 import React from "react";
 
+//Components
 import MealItem from "./MealItem";
 
+//material UI
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,7 +19,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import TableFooter from '@mui/material/TableFooter';
-import { Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
+
 import "../stylesheets/meal.css"
 
 
@@ -63,7 +66,6 @@ const Meal = (props) => {
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                             <TableCell align="right">Protein&nbsp;(g)</TableCell>
                             <TableCell align="right">Amount</TableCell>
-                            <TableCell align="right">Change Amount</TableCell>
                             <TableCell align="right">Delete</TableCell>
                         </TableRow>
                     </TableHead>
@@ -84,7 +86,6 @@ const Meal = (props) => {
                             <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
                             <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
                             <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
-                            <TableCell align="right"></TableCell>
                             <TableCell align="right"></TableCell>
                             <TableCell align="right">
                             <Button onClick = {handleOpenAdd}>Add Food</Button>

@@ -11,11 +11,16 @@ TODO
 ========================================================*/
 
 import React, {useState} from "react";
-import Backdrop from '@mui/material/Backdrop';
 import {handleUpdate, handleDelete} from '../serverFunctions/serverFunctions.jsx'
+
+//custom components
 import SearchItemForm from "./SearchItemForm";
 import ChangeAmount from "./backdrops/ChangeAmount";
 import DeleteItem from"./backdrops/DeleteItem";
+
+
+//material UI
+import Backdrop from '@mui/material/Backdrop';
 
 
 const BackdropBase = (props) => {
