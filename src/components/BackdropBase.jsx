@@ -15,6 +15,7 @@ import {handleUpdate, handleDelete} from '../serverFunctions/serverFunctions.jsx
 
 //custom components
 import SearchItemForm from "./backdrops/SearchItemForm";
+import AddFoodItem from "./backdrops/AddFoodItem"
 
 
 //material UI
@@ -23,7 +24,6 @@ import MealItemInfo from "./backdrops/MealItemInfo.jsx";
 
 
 const BackdropBase = (props) => {
-
     const {backdropState, handleServerErrors} = props;
 
     //we can use a generic close
@@ -31,28 +31,30 @@ const BackdropBase = (props) => {
         props.dispatchBackdrop({type : "CLOSEBACKDROP"});
     }
  
-    //this is terrible
+
+    //These two can be put into their respective dropback components
+    //update logged Item
     const acceptChange = (amount) => {
-        //update based on change
         handleUpdate(backdropState.loggedID, amount, props.userID, props.token, backdropState.dispatch)
         .catch(error => handleServerErrors(error))
-        //probably only need to check for errors
-        //maybe move dispatch back in here
-        //.then(res => handleServerErrors(res))
         handleClose();
     }
-
+    //deletes logged item
     const acceptChangeDelete = () => {
-        //deletes logged item
         handleDelete(backdropState.loggedID, props.userID, props.token, backdropState.dispatch)
         .catch(error => handleServerErrors(error))
-
-        //.then(res => handleServerErrors(res))
         handleClose();
     }
 
-    //needs to be replaced
-    if (backdropState.choice === 2){
+    if (backdropState.choice === 1){
+        return (
+            <AddFoodItem 
+                handleServerErrors = {handleServerErrors}
+                handleClose = {handleClose}
+            />
+        )
+    }
+    else if (backdropState.choice === 2){
         //backdrop should just be inside the thing
         return(
         <Backdrop open = {backdropState.open}>

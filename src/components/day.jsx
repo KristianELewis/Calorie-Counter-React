@@ -91,7 +91,6 @@ import backdropReducer from "../reducers/backdropReducer";
 //components
 import BackdropBase from "./BackdropBase"
 import EditUser from "./EditUser"
-import AddFoodItem from "./AddFoodItem"
 import BasicDatePicker from "./BasicDatePicker";
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
@@ -190,7 +189,10 @@ const Day = (props) => {
     //It is separate from the other backdrop stuff
     const [openAdd, setOpenAdd] = useState(false)
     const handleAddFoodItem = () => {
-        setOpenAdd(true);
+
+        dispatchBackdrop({type: "ADDDATABASEITEM"})
+
+        //setOpenAdd(true);
     }
 
 
@@ -363,11 +365,6 @@ const Day = (props) => {
 
             {/*Edit profile and add food item will not be include in the backdrop base */}
             {/*They are too different from the other backdrops, and they would be better as their own pages when/if routing is added*/}
-            <AddFoodItem
-                open = {openAdd}
-                setOpen = {setOpenAdd}
-                handleServerErrors = {handleServerErrors}
-            />
             <EditUser 
                 open = {openEditUser} 
                 setOpen = {setOpenEditUser} 
