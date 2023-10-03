@@ -2,39 +2,17 @@ import React, {useState} from "react";
 
 
 //MaterialUI
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
-import "../stylesheets/searchFoodItemResults.css"
+import "../../stylesheets/searchFoodItemResults.css"
 
 const SearchResult = (props) => {
     const result = props.result;
-    const handleAddMealItem = props.handleAddMealItem;
-
-    const [amount, setAmount] = useState(0)
-
-    const amountChangeHandler = (event) => {
-        const theAmount = parseInt(event.target.value)
-        if(theAmount >= 0)
-        {
-            setAmount(theAmount)
-        }
-        else
-        {
-            //console.log("Invalid amount input")
-        }
-    }
-
-    const addHandler = () => {
-        handleAddMealItem(result, amount)
-    }
-
     const selectFood = () => {
-        console.log("Yo")
+        props.displaySearchResult(result)
+    
     }
-
     return(
         <>
             <TableRow className = "searchFoodItemResults" hover onClick = {selectFood}>
@@ -47,16 +25,8 @@ const SearchResult = (props) => {
                 <TableCell align="right">{parseFloat((result.fat).toFixed(2))}</TableCell>
                 <TableCell align="right">{parseFloat((result.carbs).toFixed(2))}</TableCell>
                 <TableCell align="right">{parseFloat((result.protein).toFixed(2))}</TableCell>
-
             </TableRow>
-                    <TextField 
-                    value = {amount} 
-                    size = "small"
-                    onChange = {amountChangeHandler} 
-                    type = "number" 
-                    style = {{width: "75px", paddingBottom: "5px"}}
-                    />
-                    <Button onClick = {addHandler}>Add</Button>
+
         </>
     )
 }

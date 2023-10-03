@@ -6,7 +6,13 @@ import Button from "@mui/material/Button"
 import "../stylesheets/infoPage.css"
 const InfoPage = (props) => {
 
+/*
+    make this more sucinct
+    add cookie verify stuff
+        if they so no push them back to google or something
 
+
+*/
 
     return (
         <Card className ={"infoPage"}>

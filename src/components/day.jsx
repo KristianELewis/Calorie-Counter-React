@@ -30,21 +30,15 @@ Overall
 
 Eventually -more involved things-
 
--add posts and comments
--add friends
--get cognito authentication working
--routing?
-    -add fooditem and edit user should not be backdrops
 -dark mode/ light mode switch
 -error alerts could stack
 -potentially add redux
--clicking on individual food items should open up an expanded version that shows all of the nutritional information
 
-Eventually -less involved things-
 -enter at the login page should just count as login
--not allow quantites less than 1 in adding food items
+
 -login should handle empty username or password better. Currently says inccorect username or password
 -update amount accepts "e" as an input, potentially all number inputs do
+
 -changing profile picture should be looked over, its error prone. If you hit cancel while choosing files it will set the files chosen array to nothing
     ,but it does not set the file state to "none" which is used to check if a profile picture has been chosend for update
     if the user changes the profile picture, and then changes the profile pciture again but selects cancel it will cause problems
@@ -102,8 +96,6 @@ import BasicDatePicker from "./BasicDatePicker";
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
 import TotalsChart from './TotalsChart'
-
-import MealItemInfo from './backdrops/MealItemInfo'
 
 import dayjs from 'dayjs';
 

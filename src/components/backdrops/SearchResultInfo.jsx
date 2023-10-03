@@ -1,18 +1,20 @@
 import React, {useState} from "react"
-
-import Backdrop from '@mui/material/Backdrop';
 import TextField from "@mui/material/TextField";
 import Button from '@mui/material/Button';
 import Card from "@mui/material/Card";
 
 import "../../stylesheets/changeAmountBackdrop.css"
 
-
 /*
+    TODO
+    
+    -this can be more generic along with mealItemInfo
+    -they are basically the same thing
+    -it might come up again, maybe even addfooditem could have a similar structure
 
-TODO
+    the decimals need to be fixed in both
 
-refer to search result info for the todo
+
 
 */
 
@@ -38,16 +40,15 @@ const MealInfoDiv = (props) => {
 
 const MealItemInfo = (props) => {
     //just switch to destructuring, this is nonsense
-    const name = props.mealItem.name;
-    //const brand = "brandName"
-    const servingSize = props.mealItem.servingSize;
-    const servingSizeUnit = props.mealItem.servingUnit;
-    const calories = props.mealItem.calories;
-    const protein = props.mealItem.protein;
-    const fat = props.mealItem.fat;
-    const carbs = props.mealItem.carbs;
-    const amount = props.mealItem.amount;
-    const [amountChange, setAmountChange] = useState(amount)
+    const name = props.searchResult.name;
+    const brand = props.searchResult.brand;
+    const servingSize = props.searchResult.servingSize;
+    const servingSizeUnit = props.searchResult.servingUnit;
+    const calories = props.searchResult.calories;
+    const protein = props.searchResult.protein;
+    const fat = props.searchResult.fat;
+    const carbs = props.searchResult.carbs;
+    const [amountChange, setAmountChange] = useState(0)
 
     const handleAmountChange = (e) => {
         let newAmount = parseInt(e.target.value)
@@ -56,18 +57,17 @@ const MealItemInfo = (props) => {
         }
     }
     const handleAccept = () => {
-        if(amountChange !== amount)
+        if(amountChange > 0)
         {
-            props.acceptChange(amountChange)
+            props.handleAddMealItem(props.searchResult, amountChange)
         }
-        props.deny()
+        handleCancel()
     }
-    const handleDelete = () => {
-        props.acceptChangeDelete()
+    const handleCancel = () => {
+        props.setDisplayIndividual({bool : false, searchResult : {}})
     }
 
     return(
-        <Backdrop open = {true} >
             <Card 
                 className = "changeAmountBackdrop" 
                 sx = {{
@@ -84,7 +84,7 @@ const MealItemInfo = (props) => {
                 >
                     {/* h2 here needs to wrap */}
                     <h2 style={{margin: "0"}}>{name}</h2>
-                    {/*<p style={{margin: "0", fontSize: "12px"}}>{brand}</p>*/}
+                    <p style={{margin: "0", fontSize: "12px"}}>{brand}</p>
                 </div>
 
                 <hr></hr>
@@ -114,11 +114,10 @@ const MealItemInfo = (props) => {
                     />
                 </div>
                 <div className= "changeAmountButtons">
-                    <Button onClick = {handleDelete} color = "error">Delete</Button>
-                    <Button onClick = {handleAccept}>Accept</Button>
+                    <Button onClick = {handleCancel} color = "error">Cancel</Button>
+                    <Button onClick = {handleAccept}>Add</Button>
                 </div>
             </Card>
-        </Backdrop>
         )
 }
 export default MealItemInfo

@@ -14,7 +14,7 @@ import React, {useState} from "react";
 import {handleUpdate, handleDelete} from '../serverFunctions/serverFunctions.jsx'
 
 //custom components
-import SearchItemForm from "./SearchItemForm";
+import SearchItemForm from "./backdrops/SearchItemForm";
 
 
 //material UI
