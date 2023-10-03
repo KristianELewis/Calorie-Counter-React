@@ -15,27 +15,16 @@ import {handleUpdate, handleDelete} from '../serverFunctions/serverFunctions.jsx
 
 //custom components
 import SearchItemForm from "./SearchItemForm";
-import ChangeAmount from "./backdrops/ChangeAmount";
-import DeleteItem from"./backdrops/DeleteItem";
 
 
 //material UI
 import Backdrop from '@mui/material/Backdrop';
+import MealItemInfo from "./backdrops/MealItemInfo.jsx";
 
 
 const BackdropBase = (props) => {
 
     const {backdropState, handleServerErrors} = props;
-
-    //I decided on the lowest value being 0 for consitency with SearchResult.jsx
-    const [changeAmount, setChangeAmount] = useState(0);
-    const handleChange = (event) => {
-        let amount = parseInt(event.target.value)
-        if(amount >= 0)
-        {
-            setChangeAmount(amount);
-        }
-    }
 
     //we can use a generic close
     const handleClose = () => {
@@ -43,16 +32,15 @@ const BackdropBase = (props) => {
     }
  
     //this is terrible
-    const acceptChange = () => {
+    const acceptChange = (amount) => {
         //update based on change
-        handleUpdate(backdropState.loggedID, changeAmount, props.userID, props.token, backdropState.dispatch)
+        handleUpdate(backdropState.loggedID, amount, props.userID, props.token, backdropState.dispatch)
         .catch(error => handleServerErrors(error))
         //probably only need to check for errors
         //maybe move dispatch back in here
         //.then(res => handleServerErrors(res))
         handleClose();
     }
-
 
     const acceptChangeDelete = () => {
         //deletes logged item
@@ -63,34 +51,8 @@ const BackdropBase = (props) => {
         handleClose();
     }
 
-    //whats the purpose of this, should just remove it
-    const deny = () =>{
-        handleClose();
-    }
-
     //needs to be replaced
-    if (backdropState.choice === 0){
-        return(
-            <ChangeAmount 
-                backdropState = {backdropState}
-                handleChange = {handleChange}
-                acceptChange = {acceptChange}
-                changeAmount = {changeAmount}
-                deny = {deny}
-            />
-        )
-    }
-    else if (backdropState.choice === 1){
-        return(
-            <DeleteItem 
-                acceptChangeDelete = {acceptChangeDelete} 
-                deny = {deny} 
-                backdropState = {backdropState}
-            />
-
-        )
-    }
-    else if (backdropState.choice === 2){
+    if (backdropState.choice === 2){
         //backdrop should just be inside the thing
         return(
         <Backdrop open = {backdropState.open}>
@@ -99,11 +61,21 @@ const BackdropBase = (props) => {
                     meal = {backdropState.meal} 
                     mealDispatch = {backdropState.dispatch} 
                     curDate = {props.curDate}
-                    deny = {deny}
+                    deny = {handleClose}
                     token = {props.token}
                     handleServerErrors = {handleServerErrors}
                     />
         </Backdrop>
+        )
+    }
+    else if(backdropState.choice === 3){
+        return( 
+            <MealItemInfo
+                mealItem = {backdropState.mealItem}
+                acceptChange = {acceptChange}
+                acceptChangeDelete = {acceptChangeDelete}
+                deny = {handleClose}        
+            />
         )
     }
     else if (backdropState.choice === -1){

@@ -2,6 +2,20 @@
 
 TODO
 
+-Change this to "MainPage"
+
+-Add a Meals Component
+    -On choosing a day, send data down to the Meals Component
+
+-Add Reactive Functionality
+    -350 is the smallest width allowed
+        -from 450 to 350 just deccrease space
+
+-Move "Add to Food Database"
+    -perhaps on clicking add food "Add to Food Database" should be included in that backdrop
+
+
+
 ------------------------------------------------------------------
 
 Overall
@@ -88,6 +102,8 @@ import BasicDatePicker from "./BasicDatePicker";
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
 import TotalsChart from './TotalsChart'
+
+import MealItemInfo from './backdrops/MealItemInfo'
 
 import dayjs from 'dayjs';
 
@@ -317,8 +333,7 @@ const Day = (props) => {
                         <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
                     </div>
                 </div>
-            </Paper>
-
+            </Paper>            
             {errorAlert.error ? <Alert onClose = {() => {setErrorAlert({error: false, errorType : "none"})}} severity="error">{errorAlert.errorType}</Alert>: <></>}
 
             <hr></hr>

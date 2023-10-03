@@ -17,14 +17,16 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
 import TableFooter from '@mui/material/TableFooter';
+
+import Button from '@mui/material/Button';
 import Paper from "@mui/material/Paper";
 
 import "../stylesheets/meal.css"
 
 
 const Meal = (props) => {
+
     const dispatchBackdrop = props.dispatchBackdrop
     const totals = {
         calories : 0,
@@ -41,17 +43,14 @@ const Meal = (props) => {
         totals.protein += mealItem.protein * mealItem.amount
     })
 
-
-    const handleOpen = (loggedID) => {
-        dispatchBackdrop({type: "CHANGEAMOUNT", loggedID : loggedID, dispatch : props.dispatch})
-    }
-    const handleOpenDelete = (loggedID) => {
-        dispatchBackdrop({type: "DELETEITEM", loggedID : loggedID, dispatch : props.dispatch})
-    }
     const handleOpenAdd = () => {
         dispatchBackdrop({type: "ADDITEM", dispatch : props.dispatch, meal : props.meal.meal})
     }
     
+    const handleOpenMealItemInfo = (loggedID, mealItem) => {
+        dispatchBackdrop({type: "MEALITEMINFO", loggedID : loggedID, dispatch : props.dispatch, mealItem: mealItem})
+
+    }
 
     return (
         <Paper className = "meal">
@@ -65,8 +64,6 @@ const Meal = (props) => {
                             <TableCell align="right">Fat&nbsp;(g)</TableCell>
                             <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                             <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                            <TableCell align="right">Amount</TableCell>
-                            <TableCell align="right">Delete</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -74,22 +71,30 @@ const Meal = (props) => {
                         <MealItem 
                             key = {mealItem.loggedID} 
                             mealItem = {mealItem} 
-                            handleOpen = {handleOpen} 
-                            handleOpenDelete = {handleOpenDelete}/>
+                            handleOpenMealItemInfo = {handleOpenMealItemInfo}
+                        />
                     ))}
                     </TableBody>
                     <TableFooter>
                         <TableRow>
-                            <TableCell>Totals</TableCell>
+                            <TableCell>
+                                {/*having an inline style here instead of using sx allows for the backgroundColor to overide the on hover */}
+                                <Button 
+                                    onClick = {handleOpenAdd}
+                                    size = "small"
+                                    style = {{
+                                        textTransform : "none",
+                                        backgroundColor: 'transparent'
+                                    }}
+                                >
+                                Add Food</Button>
+                                | Totals
+                            </TableCell>
                             <TableCell align="right"></TableCell>
                             <TableCell align="right">{parseFloat((totals.calories).toFixed(2))}</TableCell>
                             <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
                             <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
                             <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
-                            <TableCell align="right"></TableCell>
-                            <TableCell align="right">
-                            <Button onClick = {handleOpenAdd}>Add Food</Button>
-                            </TableCell>
                         </TableRow>
                     </TableFooter>
                 </Table>
