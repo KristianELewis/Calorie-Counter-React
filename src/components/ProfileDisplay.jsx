@@ -29,7 +29,7 @@ const ProfileDisplay = (props) => {
     const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors} = props;
 
     useEffect(() => {
-        getProfilePicture(userData.userID, userData.profilePicture)
+        getProfilePicture(userData.userID)
         .then(blob =>{
             setImgURL(URL.createObjectURL(blob))
         })

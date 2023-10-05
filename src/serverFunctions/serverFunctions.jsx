@@ -353,11 +353,11 @@ GET PROFILE PICTURE
 used in ProfileDisplay.jsx
 ------------------------------------------------------------------------------------*/
 
-export async function getProfilePicture(userID, profilePicture){
+export async function getProfilePicture(userID){
     //unecessary use of userID.profilePicture
     //also limits the ability for this to be a generic function for getting user profile pictures
     //needs to be removed, just check if the user has uploaded a profile picture
-    return fetch(hostURL + `/user/${userID}/profile-picture/${profilePicture}`, {
+    return fetch(hostURL + `/user/${userID}/profile-picture/`, {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
