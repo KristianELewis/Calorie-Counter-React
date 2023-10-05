@@ -71,7 +71,8 @@ const MealItemInfo = (props) => {
             <Card 
                 className = "changeAmountBackdrop" 
                 sx = {{
-                    width : "350px"
+                    width : "350px",
+                    border : "solid grey 2px"
                 }}
             >
 
@@ -113,6 +114,7 @@ const MealItemInfo = (props) => {
                         }}
                     />
                 </div>
+                <hr></hr>
                 <div className= "changeAmountButtons">
                     <Button onClick = {handleCancel} color = "error">Cancel</Button>
                     <Button onClick = {handleAccept}>Add</Button>

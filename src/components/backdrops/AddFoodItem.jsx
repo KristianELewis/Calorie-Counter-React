@@ -161,9 +161,10 @@ const AddFoodItem = (props) => {
 
     return(
         <Backdrop open = {true}>
-            <Card className = "addFoodItem">
+            <Card className = "addFoodItem" sx ={{border : "solid grey 2px"}}>
                 {/*propbaby can use labels or something*/}
-                <h2>Add a food to the database</h2>
+                <h2>Add an item to the database</h2>
+                <hr></hr>
                 <div >
                     <InformationInput name = "Name" value = {name} setter = {setName} type = "text"/>
                     <InformationInput name = "Brand Name" value = {brandName} setter = {setBrandName} type = "text"/>
@@ -179,6 +180,7 @@ const AddFoodItem = (props) => {
                     <InformationInput name = "Fat" value = {fat} setter = {setFat} type = "number"/>
                     <InformationInput name = "Protein" value = {protein} setter = {setProtein} type = "number"/>
                 </div>
+                <hr></hr>
                 <div className = "addFoodItemButtons">
                     <Button onClick = {handleClose} >Cancel</Button>
                     <Button onClick = {acceptChange} >Accept</Button>

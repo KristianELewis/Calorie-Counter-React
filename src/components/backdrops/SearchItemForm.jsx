@@ -60,7 +60,7 @@ const SearchResults = (props) => {
     }
 
     return (
-        <div style = {{maxHeight : "400px", overflow: 'auto'}}>
+        <div style = {{maxHeight : "400px", minHeight : "100px", overflow: 'auto'}}>
             <TableContainer >
                 <Table size="small">
                     <TableHead>
@@ -183,7 +183,7 @@ const SearchItemForm = (props) => {
             <SearchResultInfo searchResult = {displayIndividual.searchResult} setDisplayIndividual = {setDisplayIndividual} handleAddMealItem = {handleAddMealItem}/>
 
             :
-        <Card className = "searchItemBackdrop">
+        <Card className = "searchItemBackdrop" sx ={{border : "solid grey 2px"}}>
                 <div style={{maxHeight: "600px", width: "600px"}}>
                     <div style = {{textAlign : "left"}}>
                         <h2>Search The Database</h2>
@@ -196,7 +196,7 @@ const SearchItemForm = (props) => {
                         searchDone = {searchDone}
                         setDisplayIndividual = {setDisplayIndividual}
                     />                    
-
+                <hr></hr>
                 <div className="searchItemButtons">
                     <Pagination count = {pages} onChange = {pageChangeHandler} style = {{paddingTop: "10px"}} page = {currentPage}/>
                     <Button onClick = {deny}> Finish Search </Button>
