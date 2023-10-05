@@ -6,6 +6,8 @@
 const backdropReducer = (state, action) => {
 
     switch (action.type){
+        case "EDITUSER":
+            return {open : true, choice : 0, loggedID : -1};
         case "ADDDATABASEITEM":
             return {open : true, choice : 1, loggedID : -1};
         case "ADDITEM":

@@ -16,6 +16,7 @@ import {handleUpdate, handleDelete} from '../serverFunctions/serverFunctions.jsx
 //custom components
 import SearchItemForm from "./backdrops/SearchItemForm";
 import AddFoodItem from "./backdrops/AddFoodItem"
+import EditUser from "./backdrops/EditUser"
 
 
 //material UI
@@ -30,7 +31,6 @@ const BackdropBase = (props) => {
     const handleClose = () => {
         props.dispatchBackdrop({type : "CLOSEBACKDROP"});
     }
- 
 
     //These two can be put into their respective dropback components
     //update logged Item
@@ -46,7 +46,20 @@ const BackdropBase = (props) => {
         handleClose();
     }
 
-    if (backdropState.choice === 1){
+    if (backdropState.choice === 0){
+        return (
+            <EditUser 
+                handleClose = {handleClose} 
+                userData = {props.userData} 
+                setUserData = {props.setUserData} 
+                imgUrl = {props.imgURL} 
+                setImgURL ={props.setImgURL}
+                token = {props.userData.token}
+                handleServerErrors = {handleServerErrors}
+                />
+        )
+    }
+    else if (backdropState.choice === 1){
         return (
             <AddFoodItem 
                 handleServerErrors = {handleServerErrors}
@@ -80,6 +93,7 @@ const BackdropBase = (props) => {
             />
         )
     }
+    //When I remove the reduce, it should just check for a choice -1 should be the default choice and just have and else statement after the other choices that just returns nothing
     else if (backdropState.choice === -1){
         //feel like I should just not have this here at all
         return(

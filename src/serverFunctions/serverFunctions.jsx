@@ -313,8 +313,10 @@ export async function signUp (userData) {
 
 /*------------------------------------------------------------------------------------
 LOGIN
-should make it so the token is stored in cookies instead
+
 used in App.jsx
+
+Eventually will switch to sessions for login and jwt with a short lifespan for crud. Not super important right now though
 ------------------------------------------------------------------------------------*/
 export async function userLogin (username, password) {
 
@@ -375,17 +377,18 @@ export async function getProfilePicture(userID, profilePicture){
 UPDATE USER DATA
 used in EditUser.jsx
 ------------------------------------------------------------------------------------*/
-export async function handleUpdateUserInfo (userData, token) {
+export async function handleUpdateUserInfo (userData, password, token) {
 
     return fetch(hostURL + `/user/${userData.userID}/user-info`, {
         method: "PATCH",
         body: JSON.stringify({
-            userData : userData
+            userData : userData,
+            password: password
         }
         ),
             headers: {
             "Content-type": "application/json; charset=UTF-8",
-            "Authorization": "Bearer " + token
+            "Authorization": password
         }
     })
     .then(res =>{             
@@ -401,16 +404,15 @@ export async function handleUpdateUserInfo (userData, token) {
 UPLOAD NEW PROFILE PICTURE
 used in EditUser.jsx
 ------------------------------------------------------------------------------------*/
-export async function uploadNewProfilePicture (userID, file, token) {
-
+export async function uploadNewProfilePicture (userID, file, password, token) {
     let formData = new FormData();
     formData.append('file', file)
-
+    formData.append('password', password)
     return fetch(hostURL + `/user/${userID}/upload-profile-picture`, {
         method: "PATCH",
         body : formData,
           headers: {
-            "Authorization": "Bearer " + token
+            "Authorization": password
       }
     })
     .then(res =>{             

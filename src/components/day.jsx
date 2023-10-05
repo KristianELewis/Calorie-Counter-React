@@ -90,7 +90,6 @@ import backdropReducer from "../reducers/backdropReducer";
 
 //components
 import BackdropBase from "./BackdropBase"
-import EditUser from "./EditUser"
 import BasicDatePicker from "./BasicDatePicker";
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
@@ -127,10 +126,11 @@ const Day = (props) => {
     // dont like this
     const [errorAlert, setErrorAlert] = useState({error: false, errorType : "none"})
 
-    const handleServerErrors = (error) => {
     //if there was an error contacting the server, this will be called
     //not sure if all these errors are necessary at the moment, this may be condensed or changed in the future
     //500 returns are unecessary
+    //this should move maybe
+    const handleServerErrors = (error) => {
         if (error instanceof AuthError)
         {
             handleLogout()
@@ -161,7 +161,7 @@ const Day = (props) => {
         }
         else{
             //this probably should never get reached
-            setErrorAlert({error: true, errorType:"There was an issue processing your request"})
+            setErrorAlert({error: true, errorType:"There was an issue processing your request 1"})
             return
         }
     }
@@ -205,7 +205,7 @@ const Day = (props) => {
 
     const [openEditUser, setOpenEditUser] = useState(false)
     const handleEditUser = () => {
-        setOpenEditUser(true)
+        dispatchBackdrop({type: "EDITUSER"})
     }
 
     /*=======================================================================
@@ -365,17 +365,6 @@ const Day = (props) => {
 
             {/*Edit profile and add food item will not be include in the backdrop base */}
             {/*They are too different from the other backdrops, and they would be better as their own pages when/if routing is added*/}
-            <EditUser 
-                open = {openEditUser} 
-                setOpen = {setOpenEditUser} 
-                userData = {props.userData} 
-                setUserData = {props.setUserData} 
-                imgUrl = {imgURL} 
-                setImgURL ={setImgURL}
-                token = {props.userData.token}
-                handleServerErrors = {handleServerErrors}
-                />
-
             <BackdropBase 
                 backdropState = {backdropState} 
                 dispatchBackdrop = {dispatchBackdrop}
@@ -383,6 +372,10 @@ const Day = (props) => {
                 userID = {props.userID}
                 token = {props.userData.token}
                 handleServerErrors = {handleServerErrors}
+                userData = {props.userData} 
+                setUserData = {props.setUserData} 
+                imgUrl = {imgURL} 
+                setImgURL ={setImgURL}
             />
         </>
     );
