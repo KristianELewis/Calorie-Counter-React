@@ -1,18 +1,11 @@
 /*
-
 TODO
-
--this is almos completely unchanged from the chartjs example
 -this chart may be unecessary, or there may be a more light weight way of doing this
 
-I am almost sure this can be optomized. I saw something about it on the website when I was adding this
-
-this curently adds 161.21 Kb to the finished project size
-
+this curently adds 161.21 Kb to the finished project size, not sure if there is a way to reduce the size
 */
 
 import React from 'react';
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
@@ -20,12 +13,17 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const TotalsChart = (props) => {
 
+  //this will most likely be different from the recorded calories due to inaccuracies in reported calories vs nutrients
+  const calories = (props.protein * 4) + (props.carbs * 4) + (props.fat * 9)
+  const protein = Math.round((props.protein *4) /calories * 100)
+  const carbs = Math.round((props.carbs * 4) /calories * 100)
+  const fat = Math.round((props.fat * 9) /calories * 100)
+
     const data = {
         labels: ['Protein', 'Carbs', 'Fat'],
         datasets: [
         {
-            label: 'grams',
-            data: [props.protein, props.carbs, props.fat],
+            data: [protein, carbs, fat],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -50,6 +48,16 @@ const TotalsChart = (props) => {
             labels: {usePointStyle: true}
             maybe switch to pointed labels if width gets too small (responsive)
             */
+          },
+          tooltip: {
+            enabled : true,
+            displayColors: false,
+            callbacks : {
+              label : function(context) {
+                let data = context.dataset.data[context.dataIndex] + "%"
+                return data
+              }
+            }
           }
         }
       }

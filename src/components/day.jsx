@@ -326,10 +326,11 @@ const Day = (props) => {
                     />
                 {/* This should be its own component */}
                 <div className = "rightSide">
-                    <h2 style ={{marginBottom : "10px"}} >Daily Totals</h2>
+                    <h2 style ={{marginBottom : "0px"}} >Daily Totals</h2>
                     <div className ="totalsDisplay">
-                        <hr style = {{width : "100%", marginBottom : "10px"}}></hr>
+                        <hr style = {{width : "100%"}}></hr>
                         <div className ="chartContainer">
+                            <p style = {{marginBottom : "10px", marginTop : "0px", fontSize: "14px"}}>Percent of calories by nutrient</p>
                             <TotalsChart
                                 carbs = {totals.carbs}
                                 protein = {totals.protein}
