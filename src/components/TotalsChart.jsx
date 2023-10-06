@@ -42,11 +42,14 @@ const TotalsChart = (props) => {
         ],
     };
     const options = {
-        responsive : true,
+        responsive : false,
         plugins: {
           legend: {
             display: true,
-            position: 'bottom'
+            position: 'left'/*,
+            labels: {usePointStyle: true}
+            maybe switch to pointed labels if width gets too small (responsive)
+            */
           }
         }
       }

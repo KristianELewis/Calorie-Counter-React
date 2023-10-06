@@ -79,7 +79,13 @@ MEAL REDUCER
 -----------------------------------------------------------------
 
 ================================================================*/
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableFooter from '@mui/material/TableFooter';
 
 
 import React, {useReducer, useState, useEffect} from "react";
@@ -303,28 +309,45 @@ const Day = (props) => {
                     setImgURL = {setImgURL}
                     handleEditUser = {handleEditUser}
                     handleLogout = {handleLogout}
+                    handleAddFoodItem = {handleAddFoodItem}
                     handleServerErrors = {handleServerErrors}
+                    curDate = {curDate} 
+                    setCurDate = {setCurDate}
                     />
                 <div className = "rightSide">
-                    <h2>Daily Totals</h2>
+                    <h2 style ={{marginBottom : "10px"}} >Daily Totals</h2>
                     <div className ="totalsDisplay">
-                        <div>
-                            <p>Calories: {parseFloat((totals.calories).toFixed(2))}</p>
-                            <p>Carbs: {parseFloat((totals.carbs).toFixed(2))}</p>
-                            <p>Fat: {parseFloat((totals.fat).toFixed(2))}</p>
-                            <p>Protein: {parseFloat((totals.protein).toFixed(2))}</p>
-
-                        </div>
                         <div className ="chartContainer">
+                            <hr></hr>
                             <TotalsChart
                                 carbs = {totals.carbs}
                                 protein = {totals.protein}
                                 fat = {totals.fat}
                             />
+                            <hr></hr>
+
                         </div>
-                    </div>
-                    <div className = "dateThing">
-                        <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
+                        <div >
+                            <Table size="small" >
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align="right">Calories</TableCell>
+                                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell align="right">{parseFloat((totals.calories).toFixed(2))}</TableCell>
+                                        <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
+                                        <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
+                                        <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </div>
+
                     </div>
                 </div>
             </Paper>            
@@ -357,7 +380,6 @@ const Day = (props) => {
                         dispatch = {dispatchS} 
                         dispatchBackdrop = {dispatchBackdrop}
                     /> : <p>loading</p>}
-                <Button onClick={handleAddFoodItem}>Add to Food Database</Button>
             </div>
             <hr></hr>
 

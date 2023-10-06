@@ -20,13 +20,15 @@ import React, {useEffect} from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
+import BasicDatePicker from './BasicDatePicker'
+
 import {getProfilePicture} from '../serverFunctions/serverFunctions'
 
 import "../stylesheets/profileDisplay.css"
 
 const ProfileDisplay = (props) => {
 
-    const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors} = props;
+    const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors, handleAddFoodItem, curDate, setCurDate} = props;
 
     useEffect(() => {
         getProfilePicture(userData.userID)
@@ -91,15 +93,15 @@ const ProfileDisplay = (props) => {
             </div>
 
             <hr style = {{width: '100%'}}></hr>
-            <div className = "bottomUserInfo">
-                <p>Age: {userData.age}</p>
-                <p>Weight: {userData.weight}</p>
+            <div className = "UserButtons">
+                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleEditUser}>Edit Profile</Button>
+                <Button size = "small" style = {{textTransform : "none"}} >Change Password</Button>
+                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleLogout}>Logout</Button>
             </div>
-                <div className = "UserButtons">
-                    <Button onClick = {handleLogout}>Logout</Button>
-                    <Button onClick = {handleEditUser}>Edit Profile</Button>
-                </div>
-
+            <hr style = {{width: '100%'}}></hr>
+            <Button size = "small" style = {{textTransform : "none"}} onClick={handleAddFoodItem}>Add to Food Database</Button>
+            <hr style = {{width: '100%'}}></hr>
+            <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
         </div>
     )
 }
