@@ -131,18 +131,19 @@ const SearchItemForm = (props) => {
         addMealItemServerFunc(props.userID, props.meal, result.foodItemID, amount, props.curDate, props.token)
         .then(res => {
             //could probably do destructing or something            
-            //add brand
+            //should atleast reorganize this to be more consistent with mealItem structure in other places
             const mealItem = {
-                meal: props.meal, 
-                amount : amount, 
-                loggedID : res.loggedID, 
+                name : result.name,
+                loggedID : res.loggedID,
+                brand : result.brand,
                 servingSize : result.servingSize,
                 servingUnit : result.servingUnit,
-                calories : result.calories, 
-                carbs : result.carbs, 
-                fat : result.fat, 
-                protein : result.protein, 
-                name : result.name, 
+                calories : result.calories,
+                fat : result.fat,
+                carbs : result.carbs,
+                protein : result.protein,
+                amount : amount,
+                meal: props.meal,
                 date : props.curDate
             }
             props.mealDispatch({type : "ADDITEM", mealItem : mealItem})

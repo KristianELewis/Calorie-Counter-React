@@ -34,7 +34,7 @@ const MealItem = (props) => {
                 T
 
             */}
-            <TableCell component="th" scope="mealItem" className ="mealItemName" style={{width: '150px'}}>{mealItem.name}, {mealItem.amount} servings</TableCell>
+            <TableCell component="th" scope="mealItem" className ="mealItemName" style={{width: '150px'}}>{mealItem.name} - {mealItem.amount} servings</TableCell>
             <TableCell align="right">{mealItem.servingSize} {mealItem.servingUnit}</TableCell>
             <TableCell align="right">{parseFloat((mealItem.calories * mealItem.amount).toFixed(2))}</TableCell>
             <TableCell align="right">{parseFloat((mealItem.fat * mealItem.amount).toFixed(2))}</TableCell>

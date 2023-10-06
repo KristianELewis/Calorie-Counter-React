@@ -39,7 +39,7 @@ const MealInfoDiv = (props) => {
 const MealItemInfo = (props) => {
     //just switch to destructuring, this is nonsense
     const name = props.mealItem.name;
-    //const brand = "brandName"
+    const brand = props.mealItem.brand
     const servingSize = props.mealItem.servingSize;
     const servingSizeUnit = props.mealItem.servingUnit;
     const calories = props.mealItem.calories;
@@ -85,7 +85,7 @@ const MealItemInfo = (props) => {
                 >
                     {/* h2 here needs to wrap */}
                     <h2 style={{margin: "0"}}>{name}</h2>
-                    {/*<p style={{margin: "0", fontSize: "12px"}}>{brand}</p>*/}
+                    <p style={{margin: "0", fontSize: "12px"}}>{brand}</p>
                 </div>
 
                 <hr></hr>
