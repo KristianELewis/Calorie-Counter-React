@@ -13,7 +13,9 @@ const backdropReducer = (state, action) => {
         case "ADDITEM":
             return {open : true, choice : 2, loggedID : -1, dispatch : action.dispatch, meal : action.meal};
         case "MEALITEMINFO":
-            return {open : true, choice : 3, loggedID : action.loggedID, dispatch : action.dispatch, mealItem : action.mealItem}
+            return {open : true, choice : 3, loggedID : action.loggedID, dispatch : action.dispatch, mealItem : action.mealItem};
+        case "CHANGEPASSWORD":
+            return {open : true, choice : 4, loggedID : -1};
         case "CLOSEBACKDROP":
             return {open : false, choice : -1};
     }

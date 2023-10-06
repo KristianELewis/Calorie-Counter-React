@@ -22,6 +22,7 @@ import EditUser from "./backdrops/EditUser"
 //material UI
 import Backdrop from '@mui/material/Backdrop';
 import MealItemInfo from "./backdrops/MealItemInfo.jsx";
+import ChangePassword from "./backdrops/ChangePassword.jsx";
 
 
 const BackdropBase = (props) => {
@@ -90,6 +91,15 @@ const BackdropBase = (props) => {
                 acceptChange = {acceptChange}
                 acceptChangeDelete = {acceptChangeDelete}
                 deny = {handleClose}        
+            />
+        )
+    }
+    else if(backdropState.choice === 4){
+        return( 
+            <ChangePassword
+                handleClose = {handleClose}
+                userData = {props.userData}
+                handleServerErrors = {handleServerErrors}
             />
         )
     }

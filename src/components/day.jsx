@@ -205,17 +205,20 @@ const Day = (props) => {
     /*=======================================================================
     CHANGE USER DATA STUFF
 
-    this will just be its own backdrop for right now. I think I'd like this to be its own page when I introduce routing
-
     ========================================================================*/
 
-    const [openEditUser, setOpenEditUser] = useState(false)
     const handleEditUser = () => {
         dispatchBackdrop({type: "EDITUSER"})
+    }
+    const handleChangePassword = () => {
+        dispatchBackdrop({type: "CHANGEPASSWORD"})
     }
 
     /*=======================================================================
         LOAD DAILY INFORMATION
+
+        Every time I scroll past this I think about ending it all
+
 
         -change this to meal information
         -If I continue to use meals like this, the meal states should be saved in inside the meals themselves.
@@ -266,6 +269,7 @@ const Day = (props) => {
 
     //This is for calculating the the totals for the chart
     //totals are also being calculated in each meal component, redudant
+    //Jesus man
     const totals = {
         calories : 0,
         carbs : 0,
@@ -313,6 +317,7 @@ const Day = (props) => {
                     handleServerErrors = {handleServerErrors}
                     curDate = {curDate} 
                     setCurDate = {setCurDate}
+                    handleChangePassword = {handleChangePassword}
                     />
                 <div className = "rightSide">
                     <h2 style ={{marginBottom : "10px"}} >Daily Totals</h2>
@@ -358,7 +363,7 @@ const Day = (props) => {
             <div>
                 {breakfast.loaded ? 
                     <Meal 
-                        meal = {breakfast} 
+                        meal = {breakfast}
                         dispatch = {dispatchB} 
                         dispatchBackdrop = {dispatchBackdrop}
                     /> : <p>loading</p>}

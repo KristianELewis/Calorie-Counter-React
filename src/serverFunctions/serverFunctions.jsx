@@ -399,7 +399,30 @@ export async function handleUpdateUserInfo (userData, password, token) {
     })
 }
 
-
+/*------------------------------------------------------------------------------------
+CHANGE PASSWORD
+used in ChangePassword.jsx
+------------------------------------------------------------------------------------*/
+export async function handleChangePassword (userData, password, oldPassword) {
+ 
+    return fetch(hostURL + `/user/${userData.userID}/user-info/password`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            password: password
+        }
+        ),
+            headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "Authorization": oldPassword
+        }
+    })
+    .then(res =>{             
+        if(!res.ok){
+            return serverErrorDecider(res)
+        }
+        return res.json()
+    })
+}
 /*------------------------------------------------------------------------------------
 UPLOAD NEW PROFILE PICTURE
 used in EditUser.jsx

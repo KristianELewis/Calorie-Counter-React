@@ -28,7 +28,7 @@ import "../stylesheets/profileDisplay.css"
 
 const ProfileDisplay = (props) => {
 
-    const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors, handleAddFoodItem, curDate, setCurDate} = props;
+    const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors, handleAddFoodItem, curDate, setCurDate, handleChangePassword} = props;
 
     useEffect(() => {
         getProfilePicture(userData.userID)
@@ -95,7 +95,7 @@ const ProfileDisplay = (props) => {
             <hr style = {{width: '100%'}}></hr>
             <div className = "UserButtons">
                 <Button size = "small" style = {{textTransform : "none"}} onClick = {handleEditUser}>Edit Profile</Button>
-                <Button size = "small" style = {{textTransform : "none"}} >Change Password</Button>
+                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleChangePassword}> Change Password</Button>
                 <Button size = "small" style = {{textTransform : "none"}} onClick = {handleLogout}>Logout</Button>
             </div>
             <hr style = {{width: '100%'}}></hr>
