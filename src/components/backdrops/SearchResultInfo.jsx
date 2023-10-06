@@ -89,13 +89,13 @@ const MealItemInfo = (props) => {
                 </div>
 
                 <hr></hr>
-                
-                <MealInfoDiv name = {"Serving Size"} value = {servingSize + " " + servingSizeUnit}/>
-                <MealInfoDiv name = {"Calories"} value = {calories + " Kcal"}/>
-                <MealInfoDiv name = {"Protein"} value = {protein + " g"}/>
-                <MealInfoDiv name = {"Carbs"} value = {carbs + " g"}/>
-                <MealInfoDiv name = {"Fat"} value = {fat + " g"}/>
 
+                <MealInfoDiv name = {"Serving Size"} value = {servingSize + " " + servingSizeUnit}/>
+                <MealInfoDiv name = {"Calories"} value = {parseFloat((calories).toFixed(2)) + " Kcal"}/>
+                <MealInfoDiv name = {"Protein"} value = {parseFloat((protein).toFixed(2)) + " g"}/>
+                <MealInfoDiv name = {"Carbs"} value = {parseFloat((carbs).toFixed(2)) + " g"}/>
+                <MealInfoDiv name = {"Fat"} value = {parseFloat((fat).toFixed(2)) + " g"}/>
+                
                 <div 
                     className = "mealItemInfoSubDiv"
                     style = {{
@@ -116,7 +116,7 @@ const MealItemInfo = (props) => {
                 </div>
                 <hr></hr>
                 <div className= "changeAmountButtons">
-                    <Button onClick = {handleCancel} color = "error">Cancel</Button>
+                    <Button onClick = {handleCancel}>Cancel</Button>
                     <Button onClick = {handleAccept}>Add</Button>
                 </div>
             </Card>

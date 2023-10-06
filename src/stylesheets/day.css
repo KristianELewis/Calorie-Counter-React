@@ -14,7 +14,6 @@
     flex-direction: row;
     justify-content: space-between;
     padding-bottom: 10px;
-    border-right: 2px black solid;
 }
 
 /*This can't stay like this*/
@@ -39,7 +38,7 @@
     align-items: center;
 }
 
-
+/*
 .chartContainer {
-    /*margin-top: 10px;*/
-}
+    margin-top: 10px;
+}*/

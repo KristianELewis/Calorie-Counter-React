@@ -79,14 +79,6 @@ MEAL REDUCER
 -----------------------------------------------------------------
 
 ================================================================*/
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
-
 
 import React, {useReducer, useState, useEffect} from "react";
 
@@ -96,7 +88,6 @@ import backdropReducer from "../reducers/backdropReducer";
 
 //components
 import BackdropBase from "./BackdropBase"
-import BasicDatePicker from "./BasicDatePicker";
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
 import TotalsChart from './TotalsChart'
@@ -105,8 +96,13 @@ import dayjs from 'dayjs';
 
 //material ui
 import Paper from '@mui/material/Paper';
-import Button from "@mui/material/Button";
 import Alert from '@mui/material/Alert';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 //utility functions
 import { loadDay } from "../serverFunctions/serverFunctions";
@@ -120,7 +116,6 @@ const lunchinit = {name: "Lunch", loaded : false, meal : 1, mealItems: []}
 const dinnerinit = {name: "Dinner", loaded : false, meal : 2, mealItems: []}
 const snackinit = {name: "Snack", loaded : false, meal : 3, mealItems: []}
 const backdropinit = {open : false, choice : -1};
-
 
 const Day = (props) => {    
     const { setUserID, setUserData, setIsLoggedIn, setAlerted } = props;
@@ -136,6 +131,10 @@ const Day = (props) => {
     //not sure if all these errors are necessary at the moment, this may be condensed or changed in the future
     //500 returns are unecessary
     //this should move maybe
+
+    //this can probably be handled diffeernt, its seems very redundant. Instead creating custom errors thee could be an error handler that
+    //creates alert objects. This function could instead just set the alert object. If there is an alert, display it, otherwise do nothing
+    //having a morere central alert handler/decider (the one in server functions) would be good, and it could work with alert setters in seeparat areas, such as in the login/signp components
     const handleServerErrors = (error) => {
         if (error instanceof AuthError)
         {
@@ -189,24 +188,23 @@ const Day = (props) => {
         removeCookies();
     }
 
-    //++++++++++++++++++++++++++++++++++++++++
-    const [backdropState, dispatchBackdrop] = useReducer(backdropReducer, backdropinit)
-    //Stuff for the backdrop for adding new foodItems to the database.
-    //It is separate from the other backdrop stuff
-    const [openAdd, setOpenAdd] = useState(false)
-    const handleAddFoodItem = () => {
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    /*=======================================================================
 
+    BACKDROP HANDLERS AND STATE
+
+    ========================================================================*/
+    
+    const [backdropState, dispatchBackdrop] = useReducer(backdropReducer, backdropinit)
+
+    const handleAddFoodItem = () => {
         dispatchBackdrop({type: "ADDDATABASEITEM"})
 
         //setOpenAdd(true);
     }
-
-
-    /*=======================================================================
-    CHANGE USER DATA STUFF
-
-    ========================================================================*/
-
+    /*------------------------------------------------------------------------
+    CHANGE USER DATA BACKDORPS
+    ------------------------------------------------------------------------*/
     const handleEditUser = () => {
         dispatchBackdrop({type: "EDITUSER"})
     }
@@ -219,6 +217,13 @@ const Day = (props) => {
 
         Every time I scroll past this I think about ending it all
 
+        -this needs to change
+        -meal states can be placed inside each meal
+        -the biggest issue would be getting all 4 meal totals over to the daily totals display
+        -could potentially do some props drilling thing
+        -send a setter function up to the day.jsx, send this function down into each meal
+        -theres too much redundancy with totals, I dont like the static meal states store in the day.jsx(althought I guess this isnt too terrible)
+        -I dont like how changing one meal means the entire display is rerendered
 
         -change this to meal information
         -If I continue to use meals like this, the meal states should be saved in inside the meals themselves.
@@ -319,19 +324,19 @@ const Day = (props) => {
                     setCurDate = {setCurDate}
                     handleChangePassword = {handleChangePassword}
                     />
+                {/* This should be its own component */}
                 <div className = "rightSide">
                     <h2 style ={{marginBottom : "10px"}} >Daily Totals</h2>
                     <div className ="totalsDisplay">
+                        <hr style = {{width : "100%", marginBottom : "10px"}}></hr>
                         <div className ="chartContainer">
-                            <hr></hr>
                             <TotalsChart
                                 carbs = {totals.carbs}
                                 protein = {totals.protein}
                                 fat = {totals.fat}
                             />
-                            <hr></hr>
-
                         </div>
+                        <hr style = {{width : "100%", marginTop : "10px"}}></hr>
                         <div >
                             <Table size="small" >
                                 <TableHead>
@@ -357,9 +362,7 @@ const Day = (props) => {
                 </div>
             </Paper>            
             {errorAlert.error ? <Alert onClose = {() => {setErrorAlert({error: false, errorType : "none"})}} severity="error">{errorAlert.errorType}</Alert>: <></>}
-
             <hr></hr>
-
             <div>
                 {breakfast.loaded ? 
                     <Meal 
@@ -387,11 +390,7 @@ const Day = (props) => {
                     /> : <p>loading</p>}
             </div>
             <hr></hr>
-
-            {/* Backdrops */}
-
-            {/*Edit profile and add food item will not be include in the backdrop base */}
-            {/*They are too different from the other backdrops, and they would be better as their own pages when/if routing is added*/}
+            {/*If I decide to keep the backdrop reducer I could probably remove some of these and put them in the dispatch */}
             <BackdropBase 
                 backdropState = {backdropState} 
                 dispatchBackdrop = {dispatchBackdrop}

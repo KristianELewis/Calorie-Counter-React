@@ -19,8 +19,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
 
-import Button from '@mui/material/Button';
 import Paper from "@mui/material/Paper";
+
+import Typography from "@mui/material/Typography";
 
 import "../stylesheets/meal.css"
 
@@ -78,16 +79,25 @@ const Meal = (props) => {
                     <TableFooter>
                         <TableRow>
                             <TableCell>
-                                {/*having an inline style here instead of using sx allows for the backgroundColor to overide the on hover */}
-                                <Button 
+                                {/*not sure if typography adds a lot to the file size. I could just use a <p> tag if it does*/}
+                                <Typography 
                                     onClick = {handleOpenAdd}
-                                    size = "small"
-                                    style = {{
-                                        textTransform : "none",
-                                        backgroundColor: 'transparent'
+                                    sx = {{
+                                        //this is trhe primary color from mui, there might be a more mui way of doing this
+                                        //CornflowerBlue = rgb(100,149,237)
+                                        color : "rgb(144, 202, 249)",
+                                        fontSize : "13px",
+                                        display: "inline",
+                                        "&:hover" : {
+                                            cursor : "pointer",
+                                            color: "rgb(50, 150, 255)"
+                                        },
+                                        "&:active" : {
+                                            color: "white"
+                                        }
                                     }}
                                 >
-                                Add Food</Button>
+                                Add Food </Typography>
                                 | Totals
                             </TableCell>
                             <TableCell align="right"></TableCell>

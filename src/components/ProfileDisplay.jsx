@@ -77,7 +77,7 @@ const ProfileDisplay = (props) => {
           },
           //this had to change. It was written for exactly two word names
           //children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-          children: name,
+          children: name[0].toUpperCase(),
         };
       }
 
@@ -85,7 +85,7 @@ const ProfileDisplay = (props) => {
     return (
         <div className = "profileContainer">
             <div className = "topUserInfo">
-                <Avatar alt={userData.name} src={imgURL} {...stringAvatar(userData.username)}></Avatar>
+                <Avatar alt={userData.username} src={imgURL} {...stringAvatar(userData.username)}></Avatar>
                 <div className = "userIdentity">
                     <h2>{userData.username}</h2>
                     <p>{userData.name}</p>
