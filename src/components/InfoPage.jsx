@@ -15,10 +15,11 @@ const InfoPage = (props) => {
 */
 
     return (
-        <Card className ={"infoPage"}>
+        //cards cant be styled with borders on regular css files
+        <Card className ={"infoPage"} sx ={{border : "solid grey 2px"}}>
             <h2>Welcome!</h2>
-            <p>This website is in early and active development. If you make an account, it's very likely to be deleted without warning!</p>
-            <p>This webste uses two cookies to remember login info. By using this website you accept the use and storage of these cookies on your device</p>
+            <p>This website is under development. If you make an account, it's likely to be deleted without warning!</p>
+            <p>This webste uses cookies to remember login info. By using this website you accept the use and storage of these cookies on your device</p>
             <Button onClick = {props.handleInfoPage}>Okay</Button>
         </Card>
 

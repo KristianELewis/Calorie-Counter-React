@@ -26,20 +26,13 @@ TODO
 
 -userSignup and login are still using their own error handling
     -probably should modify to use the more generic error handling
-______________________________________________________________________________________
-/*====================================================================================
+______________________________________________________________________________________*/
 
-LOGGED ITEM FUNCTIONS
-
-/*------------------------------------------------------------------------------------
-DELETE LOGGED ITEM
-used in BackdropBase.jsx
-------------------------------------------------------------------------------------*/
 import dayjs from 'dayjs';
+const hostURL = "http://localhost:3000"
 
-
+//this should be in the custom errors file
 import {NotFoundError, AuthError, ServerSideError, UnknownError, NoProfilePicture} from './customErrors'
-//should this be in the custom errors file instead?
 async function serverErrorDecider(res){
     //all status codes should come with a message
     //just incase one doesnt, this will asign a generic one
@@ -73,11 +66,16 @@ async function serverErrorDecider(res){
     }
 }
 
-const hostURL = "http://localhost:3000"
+/*====================================================================================
 
+LOGGED ITEM FUNCTIONS
 
+/*------------------------------------------------------------------------------------
+DELETE LOGGED ITEM
+used in BackdropBase.jsx
+------------------------------------------------------------------------------------*/
 export async function handleDelete (loggedID, userID, token, dispatch){
-
+    
     const path = hostURL + `/user/${userID}/logged-food/${loggedID}`
 
     return fetch(path, {

@@ -50,18 +50,20 @@ const LoginPage = (props) => {
             {signup ?
                 <SignupPage setSignup = {setSignup}/>
                 :
-                <Card className = "loginPage">
-                <h3>Calorie Counter</h3>
-                <h3>Login</h3>
-                <div className = "loginInputs">            
-                    <TextField onChange = {handleUsernameChange} required id = "username" label="Username" size="small"/>
-                    <TextField onChange = {handlePasswordChange} required id = "password" type="password" label="Password" size="small" sx = {{marginTop:2}}/>
-                </div>
-                {alerted.error ? <Alert onClose = {() => {setAlerted({error: false, errorType:"none"})}}severity="error">{alerted.errorType}</Alert> : <></>}
-                <div className="loginButtons">
-                    <Button onClick = {handleSignup}>Sign Up</Button>
-                    <Button onClick = {handleLogin}>Login</Button>
-                </div>
+                <Card className = "loginPage" sx ={{border : "solid grey 2px"}}>
+                    <h3>Calorie Counter</h3>
+                    <hr></hr>
+                    <h3>Login</h3>
+                    <div className = "loginInputs">            
+                        <TextField onChange = {handleUsernameChange} required id = "username" label="Username" size="small"/>
+                        <TextField onChange = {handlePasswordChange} required id = "password" type="password" label="Password" size="small" sx = {{marginTop:2}}/>
+                    </div>
+                    <hr></hr>
+                    {alerted.error ? <Alert onClose = {() => {setAlerted({error: false, errorType:"none"})}}severity="error">{alerted.errorType}</Alert> : <></>}
+                    <div className="loginButtons">
+                        <Button onClick = {handleSignup}>Sign Up</Button>
+                        <Button onClick = {handleLogin}>Login</Button>
+                    </div>
                 </Card>
             }
         </>
