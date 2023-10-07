@@ -15,12 +15,17 @@ style
 ----------------------------------------------------
 */
 
-import React, {useEffect} from "react";
+import React, {useEffect, lazy, Suspense} from "react";
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
-import BasicDatePicker from './BasicDatePicker'
+//import BasicDatePicker from './BasicDatePicker'
+//bro this is insanely easy to implement. I dont have to do anything special on the express side either. The express.static takes care of everything
+const BasicDatePicker = lazy(() => import('./BasicDatePicker')).catch((err)=>{
+    console.log(err)
+    return (<div></div>)
+})
 
 import {getProfilePicture} from '../serverFunctions/serverFunctions'
 
@@ -101,7 +106,9 @@ const ProfileDisplay = (props) => {
             <hr style = {{width: '100%'}}></hr>
             <Button size = "small" style = {{textTransform : "none"}} onClick={handleAddFoodItem}>Add to Food Database</Button>
             <hr style = {{width: '100%'}}></hr>
-            <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
+            <Suspense>
+                <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
+            </Suspense>
         </div>
     )
 }

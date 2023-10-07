@@ -80,7 +80,7 @@ MEAL REDUCER
 
 ================================================================*/
 
-import React, {useReducer, useState, useEffect} from "react";
+import React, {useReducer, useState, useEffect, lazy, Suspense} from "react";
 
 //reducers
 import reducer from "../reducers/mealReducer";
@@ -90,7 +90,8 @@ import backdropReducer from "../reducers/backdropReducer";
 import BackdropBase from "./BackdropBase"
 import Meal from "./Meal";
 import ProfileDisplay from './ProfileDisplay'
-import TotalsChart from './TotalsChart'
+//import TotalsChart from './TotalsChart'
+const TotalsChart = lazy(() => import('./TotalsChart'))
 
 import dayjs from 'dayjs';
 
@@ -324,18 +325,21 @@ const Day = (props) => {
                     setCurDate = {setCurDate}
                     handleChangePassword = {handleChangePassword}
                     />
-                {/* This should be its own component */}
+                {/* This should be its own component, just for now Ill put the lazy loading bit here in day */}
                 <div className = "rightSide">
                     <h2 style ={{marginBottom : "0px"}} >Daily Totals</h2>
                     <div className ="totalsDisplay">
                         <hr style = {{width : "100%"}}></hr>
                         <div className ="chartContainer">
                             <p style = {{marginBottom : "10px", marginTop : "0px", fontSize: "14px"}}>Percent of calories by nutrient</p>
-                            <TotalsChart
-                                carbs = {totals.carbs}
-                                protein = {totals.protein}
-                                fat = {totals.fat}
-                            />
+                            {/*Remember to remove the imports from day when you move this */}
+                            <Suspense>
+                                <TotalsChart
+                                    carbs = {totals.carbs}
+                                    protein = {totals.protein}
+                                    fat = {totals.fat}
+                                />
+                            </Suspense>
                         </div>
                         <hr style = {{width : "100%", marginTop : "10px"}}></hr>
                         <div >
