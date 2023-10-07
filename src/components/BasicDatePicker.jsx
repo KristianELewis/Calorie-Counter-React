@@ -4,14 +4,12 @@ This is almost completely unchanged from the example datepicker for materialui
 
 TODO
 
-this needs to be redone
-
-
 this file adds 174.95 Kb to the total project size... something needs to change
+I should look into how to reduce the size of this if possible. It seems exessive for what it is. I could just end up making my own datePicker
 ========================================================*/
 
 
-import * as React from 'react';
+import React from 'react';
 
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -24,7 +22,7 @@ export default function ControlledComponent(props) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker']}>
                 {/*It may be better to move the function for readibilty */}
-                <DatePicker value={curDate} onChange={(newValue) => setCurDate(newValue)}  slotProps={{ textField: { size: 'small' } }} />
+                <DatePicker value={curDate} onChange={(newValue) => setCurDate(newValue)} slotProps={{ textField: { size: 'small' }, openPickerIcon:{fontSize : "small"} }} />
             </DemoContainer>
         </LocalizationProvider>
     );
