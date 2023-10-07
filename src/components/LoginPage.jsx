@@ -8,7 +8,7 @@
 */
 
 
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 
 //material UI
 import Card from '@mui/material/Card';
@@ -21,6 +21,8 @@ import SignupPage from './SignupPage';
 
 import '../stylesheets/loginPage.css'
 const LoginPage = (props) => {
+
+        const inputRef = useRef(null);
 
         const { alerted , setAlerted} = props;
 
@@ -45,18 +47,30 @@ const LoginPage = (props) => {
             setSignup(true);
         }
         
+        const handleEnterNext = (e) => {
+            if(e.key === "Enter"){
+                inputRef.current.focus()
+            }
+        }
+
+        const handleEnterSubmit = (e) => {
+            if(e.key === "Enter"){
+                handleLogin()
+            }
+        }
+
     return(
         <>
             {signup ?
                 <SignupPage setSignup = {setSignup}/>
                 :
-                <Card className = "loginPage" sx ={{border : "solid grey 2px"}}>
+                <Card className = "loginPage" sx = {{border : "solid grey 2px"}}>
                     <h3>Calorie Counter</h3>
                     <hr></hr>
                     <h3>Login</h3>
                     <div className = "loginInputs">            
-                        <TextField onChange = {handleUsernameChange} required id = "username" label="Username" size="small"/>
-                        <TextField onChange = {handlePasswordChange} required id = "password" type="password" label="Password" size="small" sx = {{marginTop:2}}/>
+                        <TextField onChange = {handleUsernameChange} required id = "username" label = "Username" size = "small" onKeyUp = {handleEnterNext}/>
+                        <TextField onChange = {handlePasswordChange} required id = "password" type = "password" label = "Password" size = "small" sx = {{marginTop:2}} inputRef={inputRef} onKeyUp = {handleEnterSubmit}/>
                     </div>
                     <hr></hr>
                     {alerted.error ? <Alert onClose = {() => {setAlerted({error: false, errorType:"none"})}}severity="error">{alerted.errorType}</Alert> : <></>}
