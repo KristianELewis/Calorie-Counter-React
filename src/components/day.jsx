@@ -121,7 +121,7 @@ const Day = (props) => {
     const { setUserID, setUserData, setIsLoggedIn, setAlerted } = props;
 
     //used in profileDisplau and edit user
-    const [imgURL, setImgURL] = useState();
+    const [imgURL, setImgURL] = useState(null);
 
     //server error handling
     // dont like this
@@ -401,8 +401,8 @@ const Day = (props) => {
                 handleServerErrors = {handleServerErrors}
                 userData = {props.userData} 
                 setUserData = {props.setUserData} 
-                imgUrl = {imgURL} 
-                setImgURL ={setImgURL}
+                imgURL = {imgURL} 
+                setImgURL = {setImgURL}
             />
         </>
     );

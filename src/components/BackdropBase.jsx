@@ -53,7 +53,7 @@ const BackdropBase = (props) => {
                 handleClose = {handleClose} 
                 userData = {props.userData} 
                 setUserData = {props.setUserData} 
-                imgUrl = {props.imgURL} 
+                imgURL = {props.imgURL} 
                 setImgURL ={props.setImgURL}
                 token = {props.userData.token}
                 handleServerErrors = {handleServerErrors}

@@ -375,7 +375,7 @@ export async function getProfilePicture(userID){
 UPDATE USER DATA
 used in EditUser.jsx
 ------------------------------------------------------------------------------------*/
-export async function handleUpdateUserInfo (userData, password, token) {
+export async function handleUpdateUserInfo (userData, password) {
 
     return fetch(hostURL + `/user/${userData.userID}/user-info`, {
         method: "PATCH",
@@ -384,7 +384,7 @@ export async function handleUpdateUserInfo (userData, password, token) {
             password: password
         }
         ),
-            headers: {
+        headers: {
             "Content-type": "application/json; charset=UTF-8",
             "Authorization": password
         }
@@ -409,7 +409,7 @@ export async function handleChangePassword (userData, password, oldPassword) {
             password: password
         }
         ),
-            headers: {
+        headers: {
             "Content-type": "application/json; charset=UTF-8",
             "Authorization": oldPassword
         }
@@ -425,14 +425,14 @@ export async function handleChangePassword (userData, password, oldPassword) {
 UPLOAD NEW PROFILE PICTURE
 used in EditUser.jsx
 ------------------------------------------------------------------------------------*/
-export async function uploadNewProfilePicture (userID, file, password, token) {
+export async function uploadNewProfilePicture (userID, file, password) {
     let formData = new FormData();
     formData.append('file', file)
     formData.append('password', password)
     return fetch(hostURL + `/user/${userID}/upload-profile-picture`, {
         method: "PATCH",
         body : formData,
-          headers: {
+        headers: {
             "Authorization": password
       }
     })
@@ -444,4 +444,23 @@ export async function uploadNewProfilePicture (userID, file, password, token) {
     })
 }
 
+/*------------------------------------------------------------------------------------
+DELETE PROFILE PICTURE
+used in EditUser.jsx
+------------------------------------------------------------------------------------*/
+export async function deleteProfilePicture (userID, password) {
+
+    return fetch(hostURL + `/user/${userID}/delete-profile-picture`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": password
+      }
+    })
+    .then(res =>{             
+        if(!res.ok){
+            return serverErrorDecider(res)
+        }
+        return res.json()
+    })
+}
 /*====================================================================================*/
