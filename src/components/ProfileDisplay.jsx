@@ -22,10 +22,7 @@ import Button from '@mui/material/Button';
 
 //import BasicDatePicker from './BasicDatePicker'
 //bro this is insanely easy to implement. I dont have to do anything special on the express side either. The express.static takes care of everything
-const BasicDatePicker = lazy(() => import('./BasicDatePicker')).catch((err)=>{
-    console.log(err)
-    return (<div></div>)
-})
+const BasicDatePicker = lazy(() => import('./BasicDatePicker'))
 
 import {getProfilePicture} from '../serverFunctions/serverFunctions'
 
