@@ -4,10 +4,6 @@ TODO
 
 OVERALL
 -Maybe completely rework this page.
--This needs to be the center for styling, and media query handling
--Main.jsx should pass down the screen dimensions to app.jsx
-    -this will allow for app.jsx to be used as is in the portfolio-web-app
-    -in the portfolio project the window dimensions could be passed down in place
 
 OLD TODO LIST
 -I should think about an alternative to the ternary exressions used to decide what is being displayed
@@ -26,7 +22,7 @@ USERDATA
 
 ====================================================================================*/
 
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect } from 'react'
 
 //need to deal with this css file
 import './App.css'
@@ -43,7 +39,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { userLogin, tokenLoginS } from './serverFunctions/serverFunctions';
 import {getCookies, setCookies, removeCookies} from './serverFunctions/cookieUtilFunctions'
 
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { widthContext } from './Contexts.js'
 
 //needed for dark theme
@@ -99,23 +94,9 @@ async function tokenLogin (username, token, setAlerted) {
   })
 }
 
-const App = () => {
+const App = (props) => {
 
-    //If its the stand alone version, it should use mediaQueries
-    //if its the embbeded version, it should use the provided width and height
-    //I dont think height will matter so much
-    /*
-        const standAlone = props.standAlone;
-        if(standAlone === true){
-            
-        }
-        else{
-            
-        }
-    */
-    const media700W = useMediaQuery('(min-width : 700px)')
-    const media600W = useMediaQuery('(min-width : 600px)')
-    const media500W = useMediaQuery('(min-width : 500px)')
+    const { media700W, media600W, media500W } = props;
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
