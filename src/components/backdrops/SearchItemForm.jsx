@@ -40,6 +40,10 @@ import TableCell from '@mui/material/TableCell';
 //not using this. What was this for?
 //import { useThemeProps } from "@mui/material/styles";
 
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 import {serverSearch, addMealItemServerFunc, changeResultsPage} from "../../serverFunctions/serverFunctions";
 
@@ -198,7 +202,25 @@ const SearchItemForm = (props) => {
                 <div>
                     <div style = {{textAlign : "left"}}>
                         <h2>Search The Database</h2>
-                        <TextField size = "small" label = "Search" value = {searchBoxText} onChange = {handleSearchBoxChange} onKeyUp = {handleEnter} sx = {{width: "100%"}}></TextField>
+                        <TextField 
+                            size = "small" 
+                            label = "Search" 
+                            value = {searchBoxText} 
+                            onChange = {handleSearchBoxChange} 
+                            onKeyUp = {handleEnter} 
+                            sx = {{width: "100%"}}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">
+                                        <IconButton 
+                                            size = "small"
+                                            onClick = {handleSearch}
+                                            >
+                                            <SearchIcon fontSize = "small"/>
+                                        </IconButton>
+                                    </InputAdornment>,
+                              }}
+                        />
+
                     </div>
                     <hr style = {{}}></hr>
 
