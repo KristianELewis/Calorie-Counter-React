@@ -29,8 +29,8 @@ TODO
 ______________________________________________________________________________________*/
 
 import dayjs from 'dayjs';
-const hostURL = "http://localhost:3000"
-
+//const hostURL = "http://localhost:3000"
+const hostURL = "http://192.168.1.253:3000"
 //this should be in the custom errors file
 import {NotFoundError, AuthError, ServerSideError, UnknownError, NoProfilePicture} from './customErrors'
 async function serverErrorDecider(res){

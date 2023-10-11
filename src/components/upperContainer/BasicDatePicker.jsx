@@ -22,7 +22,7 @@ export default function ControlledComponent(props) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DemoContainer components={['DatePicker']}>
                 {/*It may be better to move the function for readibilty */}
-                <DatePicker value={curDate} onChange={(newValue) => setCurDate(newValue)} slotProps={{ textField: { size: 'small' }, openPickerIcon:{fontSize : "small"} }} />
+                <DatePicker value={curDate} onChange={(newValue) => setCurDate(newValue)} slotProps={{ textField: { size: 'small', sx : {width: "100%"} }, openPickerIcon:{fontSize : "small"} }} />
             </DemoContainer>
         </LocalizationProvider>
     );

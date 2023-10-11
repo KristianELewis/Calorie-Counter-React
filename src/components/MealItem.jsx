@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 //materialUI
 import TableRow from '@mui/material/TableRow';
@@ -6,8 +6,14 @@ import TableCell from '@mui/material/TableCell';
 import Button from '@mui/material/Button';
 //import CloseIcon from '@mui/icons-material/Close';
 
+import { widthContext } from '../Contexts.js'
+
+
 const MealItem = (props) => {
-        
+
+    
+    const { media700W, media500W } = useContext(widthContext)
+
     const mealItem = props.mealItem;
 
     const handleOpen = () => {
@@ -34,12 +40,12 @@ const MealItem = (props) => {
                 T
 
             */}
-            <TableCell component="th" scope="mealItem" className ="mealItemName" style={{width: '150px'}}>{mealItem.name} - {mealItem.amount} servings</TableCell>
-            <TableCell align="right">{mealItem.servingSize} {mealItem.servingUnit}</TableCell>
+            <TableCell component="th" scope="mealItem" className ="mealItemName" style={{width: '150px'}}>{mealItem.name} - {mealItem.amount} servings {!media700W && "of " + mealItem.servingSize + mealItem.servingUnit}</TableCell>
+            {media700W && <TableCell align="right">{mealItem.servingSize} {mealItem.servingUnit}</TableCell>}
             <TableCell align="right">{parseFloat((mealItem.calories * mealItem.amount).toFixed(2))}</TableCell>
-            <TableCell align="right">{parseFloat((mealItem.fat * mealItem.amount).toFixed(2))}</TableCell>
-            <TableCell align="right">{parseFloat((mealItem.carbs * mealItem.amount).toFixed(2))}</TableCell>
-            <TableCell align="right">{parseFloat((mealItem.protein * mealItem.amount).toFixed(2))}</TableCell>
+            {media500W && <TableCell align="right">{parseFloat((mealItem.fat * mealItem.amount).toFixed(2))}</TableCell>}
+            {media500W && <TableCell align="right">{parseFloat((mealItem.carbs * mealItem.amount).toFixed(2))}</TableCell>}
+            {media500W && <TableCell align="right">{parseFloat((mealItem.protein * mealItem.amount).toFixed(2))}</TableCell>}
         </TableRow>
 
     </>

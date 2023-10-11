@@ -5,7 +5,7 @@ TODO
 
 */
 
-import React from "react";
+import React, { useContext } from "react";
 
 //Components
 import MealItem from "./MealItem";
@@ -20,13 +20,16 @@ import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
 
 import Paper from "@mui/material/Paper";
-
 import Typography from "@mui/material/Typography";
+
+import { widthContext } from '../Contexts.js'
 
 import "../stylesheets/meal.css"
 
 
 const Meal = (props) => {
+
+    const { media700W, media500W } = useContext(widthContext)
 
     const dispatchBackdrop = props.dispatchBackdrop
     const totals = {
@@ -60,11 +63,11 @@ const Meal = (props) => {
                     <TableHead>
                         <TableRow>
                             <TableCell style={{width: '200px'}} >{props.meal.name}</TableCell>
-                            <TableCell align="right">Serving size</TableCell>
+                            {media700W && <TableCell align="right">Serving size</TableCell>}
                             <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            {media500W && <TableCell align="right">Fat&nbsp;(g)</TableCell>}
+                            {media500W && <TableCell align="right">Carbs&nbsp;(g)</TableCell>}
+                            {media500W && <TableCell align="right">Protein&nbsp;(g)</TableCell>}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -100,11 +103,11 @@ const Meal = (props) => {
                                 Add Food </Typography>
                                 | Totals
                             </TableCell>
-                            <TableCell align="right"></TableCell>
+                            {media700W && <TableCell align="right"></TableCell>}
                             <TableCell align="right">{parseFloat((totals.calories).toFixed(2))}</TableCell>
-                            <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
-                            <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
-                            <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
+                            {media500W && <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>}
+                            {media500W && <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>}
+                            {media500W && <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>}
                         </TableRow>
                     </TableFooter>
                 </Table>

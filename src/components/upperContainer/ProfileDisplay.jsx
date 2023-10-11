@@ -15,22 +15,27 @@ style
 ----------------------------------------------------
 */
 
-import React, {useEffect, lazy, Suspense} from "react";
+import React, {useEffect} from "react";
 
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 
 //import BasicDatePicker from './BasicDatePicker'
 //bro this is insanely easy to implement. I dont have to do anything special on the express side either. The express.static takes care of everything
-const BasicDatePicker = lazy(() => import('./BasicDatePicker'))
 
-import {getProfilePicture} from '../serverFunctions/serverFunctions'
+import {getProfilePicture} from '../../serverFunctions/serverFunctions'
 
-import "../stylesheets/profileDisplay.css"
+import "../../stylesheets/profileDisplay.css"
 
 const ProfileDisplay = (props) => {
 
-    const {userData, setImgURL, imgURL, handleEditUser, handleLogout, handleServerErrors, handleAddFoodItem, curDate, setCurDate, handleChangePassword} = props;
+    const {
+        userData,
+        setImgURL, 
+        imgURL, 
+        handleServerErrors,
+        width,
+        height
+    } = props;
 
     useEffect(() => {
         getProfilePicture(userData.userID)
@@ -74,8 +79,8 @@ const ProfileDisplay = (props) => {
           sx: {
             bgcolor: stringToColor(name),
             //added width and Height here
-            width: 125,
-            height: 125
+            width: width,
+            height: height
           },
           //this had to change. It was written for exactly two word names
           //children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
@@ -85,27 +90,12 @@ const ProfileDisplay = (props) => {
 
 
     return (
-        <div className = "profileContainer">
-            <div className = "topUserInfo">
-                <Avatar alt={userData.username} src={imgURL} {...stringAvatar(userData.username)}></Avatar>
-                <div className = "userIdentity">
-                    <h2>{userData.username}</h2>
-                    <p>{userData.name}</p>
-                </div>
+        <div className = "topUserInfo">
+            <Avatar alt={userData.username} src={imgURL} {...stringAvatar(userData.username)}></Avatar>
+            <div className = "userIdentity">
+                <h2>{userData.username}</h2>
+                <p>{userData.name}</p>
             </div>
-
-            <hr style = {{width: '100%'}}></hr>
-            <div className = "UserButtons">
-                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleEditUser}>Edit Profile</Button>
-                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleChangePassword}> Change Password</Button>
-                <Button size = "small" style = {{textTransform : "none"}} onClick = {handleLogout}>Logout</Button>
-            </div>
-            <hr style = {{width: '100%'}}></hr>
-            <Button size = "small" style = {{textTransform : "none"}} onClick={handleAddFoodItem}>Add to Food Database</Button>
-            <hr style = {{width: '100%'}}></hr>
-            <Suspense>
-                <BasicDatePicker curDate = {curDate} setCurDate = {setCurDate} />
-            </Suspense>
         </div>
     )
 }

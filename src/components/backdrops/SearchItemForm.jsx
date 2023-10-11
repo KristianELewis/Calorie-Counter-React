@@ -18,7 +18,7 @@ a lot of these states can be cut down or consolidated
 */
 
 
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 
 //MaterialUI
 import TextField from "@mui/material/TextField";
@@ -40,19 +40,24 @@ import TableCell from '@mui/material/TableCell';
 //not using this. What was this for?
 //import { useThemeProps } from "@mui/material/styles";
 
-import "../../stylesheets/searchItemBackdrop.css"
 
 import {serverSearch, addMealItemServerFunc, changeResultsPage} from "../../serverFunctions/serverFunctions";
-import SearchResult from "./SearchResult";
 
+import SearchResult from "./SearchResult";
 import SearchResultInfo from "./SearchResultInfo"
 
+import { widthContext } from '../../Contexts.js'
+
+import "../../stylesheets/searchItemBackdrop.css"
 
 const SearchResults = (props) => {
     const {
         searchResults, 
         searchDone,
-        setDisplayIndividual
+        setDisplayIndividual,
+        media700W,
+        media600W,
+        media500W
     } = props;
 
     const displaySearchResult = (result) => {
@@ -60,17 +65,18 @@ const SearchResults = (props) => {
     }
 
     return (
-        <div style = {{maxHeight : "400px", minHeight : "100px", overflow: 'auto'}}>
+        <div style = {{maxHeight : "40vH", minHeight : "100px", overflow: 'auto'}}>
             <TableContainer >
                 <Table size="small">
                     <TableHead>
                         <TableRow>
+                            {/**style = {!media500W ? {fontSize : "12px"} : {fontSize : "14px"}} */}
                             <TableCell>Name</TableCell>
-                            <TableCell align="right">Serving Size</TableCell>
+                            {media700W && <TableCell align="right">Serving Size</TableCell>}
                             <TableCell align="right">Calories</TableCell>
-                            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                            {media500W && <TableCell align="right">Fat&nbsp;(g)</TableCell>}
+                            {media500W && <TableCell align="right">Carbs&nbsp;(g)</TableCell>}
+                            {media500W && <TableCell align="right">Protein&nbsp;(g)</TableCell>}
                         </TableRow>
                     </TableHead>
                         <TableBody>
@@ -79,6 +85,8 @@ const SearchResults = (props) => {
                                     key = {result.foodItemID}
                                     result = {result} 
                                     displaySearchResult = {displaySearchResult}
+                                    media700W = {media700W}
+                                    media500W = {media500W}
                                     />
                             })}
                         </TableBody>
@@ -90,6 +98,8 @@ const SearchResults = (props) => {
 }
 
 const SearchItemForm = (props) => {
+
+    const { media700W, media600W , media500W } = useContext(widthContext)
 
     const {deny, handleServerErrors} = props;
     const [displayIndividual, setDisplayIndividual] = useState({bool : false, searchResult : {}})
@@ -185,10 +195,10 @@ const SearchItemForm = (props) => {
 
             :
         <Card className = "searchItemBackdrop" sx ={{border : "solid grey 2px"}}>
-                <div style={{maxHeight: "600px", width: "600px"}}>
+                <div>
                     <div style = {{textAlign : "left"}}>
                         <h2>Search The Database</h2>
-                        <TextField size = "small" label = "Search" value = {searchBoxText} onChange = {handleSearchBoxChange} onKeyUp = {handleEnter} sx = {{width: "90%"}}></TextField>
+                        <TextField size = "small" label = "Search" value = {searchBoxText} onChange = {handleSearchBoxChange} onKeyUp = {handleEnter} sx = {{width: "100%"}}></TextField>
                     </div>
                     <hr style = {{}}></hr>
 
@@ -196,12 +206,15 @@ const SearchItemForm = (props) => {
                         searchResults = {searchResults[0]}
                         searchDone = {searchDone}
                         setDisplayIndividual = {setDisplayIndividual}
+                        media700W = {media700W}
+                        media600W = {media600W}
+                        media500W = {media500W}
                     />                    
-                <hr></hr>
-                <div className="searchItemButtons">
-                    <Pagination count = {pages} onChange = {pageChangeHandler} style = {{paddingTop: "10px"}} page = {currentPage}/>
-                    <Button onClick = {deny}> Finish Search </Button>
-                </div> 
+                    <hr></hr>
+                    <div className="searchItemButtons" style ={media500W ? {} : {flexDirection : "column", alignItems: "center"}}>
+                        <Pagination count = {pages} onChange = {pageChangeHandler} style = {{paddingTop: "10px"}} page = {currentPage} size = {media600W ? "medium" :"small"}/>
+                        <Button onClick = {deny}> Finish Search </Button>
+                    </div> 
             </div>
         </Card>
         }

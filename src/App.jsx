@@ -3,12 +3,15 @@
 TODO
 
 OVERALL
--add react router here. 
--Remove signin and signup, add them to their own pages
-
+-Maybe completely rework this page.
+-This needs to be the center for styling, and media query handling
+-Main.jsx should pass down the screen dimensions to app.jsx
+    -this will allow for app.jsx to be used as is in the portfolio-web-app
+    -in the portfolio project the window dimensions could be passed down in place
 
 OLD TODO LIST
 -I should think about an alternative to the ternary exressions used to decide what is being displayed
+-Remove signin and signup, add them to their own pages
 
 
 LOGIN FUNCTIONALITY
@@ -23,7 +26,7 @@ USERDATA
 
 ====================================================================================*/
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 
 //need to deal with this css file
 import './App.css'
@@ -40,7 +43,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { userLogin, tokenLoginS } from './serverFunctions/serverFunctions';
 import {getCookies, setCookies, removeCookies} from './serverFunctions/cookieUtilFunctions'
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { widthContext } from './Contexts.js'
+
 //needed for dark theme
+//themes might be able to do stuff with mediaQueries
 const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -94,6 +101,22 @@ async function tokenLogin (username, token, setAlerted) {
 
 const App = () => {
 
+    //If its the stand alone version, it should use mediaQueries
+    //if its the embbeded version, it should use the provided width and height
+    //I dont think height will matter so much
+    /*
+        const standAlone = props.standAlone;
+        if(standAlone === true){
+            
+        }
+        else{
+            
+        }
+    */
+    const media700W = useMediaQuery('(min-width : 700px)')
+    const media600W = useMediaQuery('(min-width : 600px)')
+    const media500W = useMediaQuery('(min-width : 500px)')
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     //userID needs to be deleted it is redundant
@@ -140,6 +163,7 @@ const App = () => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <widthContext.Provider value = {{media700W : media700W, media600W : media600W, media500W : media500W}}>
                 {infoPage ? 
                 <InfoPage
                     handleInfoPage= {handleInfoPage}
@@ -163,7 +187,7 @@ const App = () => {
                         />
                     </div>)
                 }
-        
+            </widthContext.Provider>
         </ThemeProvider>
     )
 }

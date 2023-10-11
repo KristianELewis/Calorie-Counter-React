@@ -80,7 +80,7 @@ MEAL REDUCER
 
 ================================================================*/
 
-import React, {useReducer, useState, useEffect, lazy, Suspense} from "react";
+import React, {useReducer, useState, useEffect} from "react";
 
 //reducers
 import reducer from "../reducers/mealReducer";
@@ -89,21 +89,13 @@ import backdropReducer from "../reducers/backdropReducer";
 //components
 import BackdropBase from "./BackdropBase"
 import Meal from "./Meal";
-import ProfileDisplay from './ProfileDisplay'
-//import TotalsChart from './TotalsChart'
-const TotalsChart = lazy(() => import('./TotalsChart'))
+
+import UpperContainer from './upperContainer/UpperContainer'
 
 import dayjs from 'dayjs';
 
 //material ui
-import Paper from '@mui/material/Paper';
 import Alert from '@mui/material/Alert';
-
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 
 //utility functions
 import { loadDay } from "../serverFunctions/serverFunctions";
@@ -118,8 +110,10 @@ const dinnerinit = {name: "Dinner", loaded : false, meal : 2, mealItems: []}
 const snackinit = {name: "Snack", loaded : false, meal : 3, mealItems: []}
 const backdropinit = {open : false, choice : -1};
 
+
 const Day = (props) => {    
     const { setUserID, setUserData, setIsLoggedIn, setAlerted } = props;
+
 
     //used in profileDisplau and edit user
     const [imgURL, setImgURL] = useState(null);
@@ -310,62 +304,19 @@ const Day = (props) => {
     return (
         <>
             {/* This section could potentially be moved into a single component*/}
-            {/* Adding posts and other social media content will completely change the stucture of this whole page*/}
-
-            <Paper elevation={2} className = "upperContainer">
-                <ProfileDisplay 
-                    userData = {props.userData} 
-                    imgURL = {imgURL} 
-                    setImgURL = {setImgURL}
-                    handleEditUser = {handleEditUser}
-                    handleLogout = {handleLogout}
-                    handleAddFoodItem = {handleAddFoodItem}
-                    handleServerErrors = {handleServerErrors}
-                    curDate = {curDate} 
-                    setCurDate = {setCurDate}
-                    handleChangePassword = {handleChangePassword}
-                    />
-                {/* This should be its own component, just for now Ill put the lazy loading bit here in day */}
-                <div className = "rightSide">
-                    <h2 style ={{marginBottom : "0px"}} >Daily Totals</h2>
-                    <div className ="totalsDisplay">
-                        <hr style = {{width : "100%"}}></hr>
-                        <div className ="chartContainer">
-                            <p style = {{marginBottom : "10px", marginTop : "0px", fontSize: "14px"}}>Percent of calories by nutrient</p>
-                            {/*Remember to remove the imports from day when you move this */}
-                            <Suspense>
-                                <TotalsChart
-                                    carbs = {totals.carbs}
-                                    protein = {totals.protein}
-                                    fat = {totals.fat}
-                                />
-                            </Suspense>
-                        </div>
-                        <hr style = {{width : "100%", marginTop : "10px"}}></hr>
-                        <div >
-                            <Table size="small" >
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell align="right">Calories</TableCell>
-                                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell align="right">{parseFloat((totals.calories).toFixed(2))}</TableCell>
-                                        <TableCell align="right">{parseFloat((totals.fat).toFixed(2))}</TableCell>
-                                        <TableCell align="right">{parseFloat((totals.carbs).toFixed(2))}</TableCell>
-                                        <TableCell align="right">{parseFloat((totals.protein).toFixed(2))}</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </div>
-
-                    </div>
-                </div>
-            </Paper>            
+            <UpperContainer                 
+                userData = {props.userData} 
+                imgURL = {imgURL} 
+                setImgURL = {setImgURL}
+                handleEditUser = {handleEditUser}
+                handleLogout = {handleLogout}
+                handleAddFoodItem = {handleAddFoodItem}
+                handleServerErrors = {handleServerErrors}
+                curDate = {curDate} 
+                setCurDate = {setCurDate}
+                handleChangePassword = {handleChangePassword}
+                totals = {totals}
+                />         
             {errorAlert.error ? <Alert onClose = {() => {setErrorAlert({error: false, errorType : "none"})}} severity="error">{errorAlert.errorType}</Alert>: <></>}
             <hr></hr>
             <div>
