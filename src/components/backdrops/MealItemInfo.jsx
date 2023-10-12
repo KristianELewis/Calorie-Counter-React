@@ -67,7 +67,6 @@ const MealItemInfo = (props) => {
     }
 
     return(
-        <Backdrop open = {true} >
             <Card 
                 className = "changeAmountBackdrop" 
                 sx = {{
@@ -120,7 +119,6 @@ const MealItemInfo = (props) => {
                     <Button onClick = {handleAccept}>Accept</Button>
                 </div>
             </Card>
-        </Backdrop>
         )
 }
 export default MealItemInfo

@@ -47,31 +47,32 @@ const BackdropBase = (props) => {
         handleClose();
     }
 
-    if (backdropState.choice === 0){
-        return (
-            <EditUser 
-                handleClose = {handleClose} 
-                userData = {props.userData} 
-                setUserData = {props.setUserData} 
-                imgURL = {props.imgURL} 
-                setImgURL ={props.setImgURL}
-                token = {props.userData.token}
-                handleServerErrors = {handleServerErrors}
+    //this is to fix the issue with backdrops loading in endless css files
+    const backdropInternalDecider = () => {
+        if (backdropState.choice === 0){
+            return (
+                <EditUser 
+                    handleClose = {handleClose} 
+                    userData = {props.userData} 
+                    setUserData = {props.setUserData} 
+                    imgURL = {props.imgURL} 
+                    setImgURL ={props.setImgURL}
+                    token = {props.userData.token}
+                    handleServerErrors = {handleServerErrors}
+                    />
+            )
+        }
+        else if (backdropState.choice === 1){
+            return (
+                <AddFoodItem 
+                    handleServerErrors = {handleServerErrors}
+                    handleClose = {handleClose}
                 />
-        )
-    }
-    else if (backdropState.choice === 1){
-        return (
-            <AddFoodItem 
-                handleServerErrors = {handleServerErrors}
-                handleClose = {handleClose}
-            />
-        )
-    }
-    else if (backdropState.choice === 2){
-        //backdrop should just be inside the thing
-        return(
-        <Backdrop open = {backdropState.open}>
+            )
+        }
+        else if (backdropState.choice === 2){
+            //backdrop should just be inside the thing
+            return(
                 <SearchItemForm 
                     userID = {props.userID} 
                     meal = {backdropState.meal} 
@@ -81,40 +82,48 @@ const BackdropBase = (props) => {
                     token = {props.token}
                     handleServerErrors = {handleServerErrors}
                     />
-        </Backdrop>
-        )
+            )
+        }
+        else if(backdropState.choice === 3){
+            return( 
+                <MealItemInfo
+                    mealItem = {backdropState.mealItem}
+                    acceptChange = {acceptChange}
+                    acceptChangeDelete = {acceptChangeDelete}
+                    deny = {handleClose}        
+                />
+            )
+        }
+        else if(backdropState.choice === 4){
+            return( 
+                <ChangePassword
+                    handleClose = {handleClose}
+                    userData = {props.userData}
+                    handleServerErrors = {handleServerErrors}
+                />
+            )
+        }
+        //When I remove the reduce, it should just check for a choice -1 should be the default choice and just have and else statement after the other choices that just returns nothing
+        else if (backdropState.choice === -1){
+            //feel like I should just not have this here at all
+            return(
+                <>
+                    {/*<Backdrop open = {backdropState.open}>
+                    </Backdrop>*/}
+                </>
+            )
+        }
+        else{
+            //need to throw an error here/fail gracefully
+            return (<h1>There is some issue with the backdrop</h1>)
+        }
     }
-    else if(backdropState.choice === 3){
-        return( 
-            <MealItemInfo
-                mealItem = {backdropState.mealItem}
-                acceptChange = {acceptChange}
-                acceptChangeDelete = {acceptChangeDelete}
-                deny = {handleClose}        
-            />
-        )
-    }
-    else if(backdropState.choice === 4){
-        return( 
-            <ChangePassword
-                handleClose = {handleClose}
-                userData = {props.userData}
-                handleServerErrors = {handleServerErrors}
-            />
-        )
-    }
-    //When I remove the reduce, it should just check for a choice -1 should be the default choice and just have and else statement after the other choices that just returns nothing
-    else if (backdropState.choice === -1){
-        //feel like I should just not have this here at all
-        return(
+
+    return (
         <Backdrop open = {backdropState.open}>
+            {backdropInternalDecider()}
         </Backdrop>
-        )
-    }
-    else{
-        //need to throw an error here/fail gracefully
-        return (<h1>There is some issue with the backdrop</h1>)
-    }
+    )
 }
 
 export default BackdropBase;

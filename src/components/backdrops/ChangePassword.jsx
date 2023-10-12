@@ -95,7 +95,6 @@ const ChangePassword = (props) => {
 
     //this is using the editUser css classes
     return (
-        <Backdrop open = {true}>
             <Card className = "editUser" sx ={{border : "solid grey 2px", width : "325px"}}>
                 {/*propbaby can use labels or something*/}
                 <h2 style = {{marginTop: "0px"}}>Change Your Password</h2>
@@ -133,7 +132,6 @@ const ChangePassword = (props) => {
                     <Button onClick = {handleAccept} >Accept</Button>
                 </div>
             </Card>
-        </Backdrop>
     )
 }
 //                 <Alert onClose = {() => {setErrorAlert({error: false, errorType : "none"})}} severity="error">{errorAlert.errorType}</Alert>

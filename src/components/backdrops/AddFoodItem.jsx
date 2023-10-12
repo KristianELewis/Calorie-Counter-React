@@ -160,7 +160,6 @@ const AddFoodItem = (props) => {
 
 
     return(
-        <Backdrop open = {true}>
             <Card className = "addFoodItem" sx ={{border : "solid grey 2px"}}>
                 {/*propbaby can use labels or something*/}
                 <h2>Add an item to the database</h2>
@@ -186,7 +185,6 @@ const AddFoodItem = (props) => {
                     <Button onClick = {acceptChange} >Accept</Button>
                 </div>
             </Card>
-        </Backdrop>
         )
 
 }

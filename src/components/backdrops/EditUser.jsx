@@ -178,7 +178,6 @@ const EditUser = (props) => {
         handleClose();
     }
     return (
-        <Backdrop open = {true}>
             <Card className = "editUser" sx ={{border : "solid grey 2px", width : "325px"}}>
                 {/*propbaby can use labels or something*/}
                 <h2 style = {{marginTop: "0px"}}>Edit Your Information</h2>
@@ -240,7 +239,6 @@ const EditUser = (props) => {
                     <Button onClick = {acceptChange} >Accept</Button>
                 </div>
             </Card>
-        </Backdrop>
     )
 }
 
