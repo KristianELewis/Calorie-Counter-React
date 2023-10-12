@@ -182,7 +182,7 @@ const UpperContainer = (props) => {
     }
     else {
         return (
-            <Paper elevation={2} className = "upperContainer"  sx = {{flexDirection : "column"}}>
+            <Paper elevation={2} sx = {{flexDirection : "column"}}>
                 <div style = {{display: "flex", flexDirection : "column"}}>
                 <div className = "profileContainer" style = {{ width : "100%" }}>
                     <ProfileDisplay 
