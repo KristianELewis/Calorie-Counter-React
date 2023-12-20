@@ -16,7 +16,6 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from '@mui/material/Alert';
 
-
 import { signUp } from "../serverFunctions/loginSignupServerFunctions.js";
 
 import '../stylesheets/signup.css'
@@ -73,7 +72,7 @@ const InformationInput = (props) => {
 
 const SignupPage = (props) => {
 
-        const [signupError, setSignupError] = useState({isError : false, errorType : "none"})
+        const [signupError, setSignupError] = useState({error : false, errorType : "none"})
         const {setSignup} = props;
 
         const [signupComplete, setSignupComplete] = useState(false);
@@ -96,15 +95,15 @@ const SignupPage = (props) => {
         //there is also serverside validation
         const userValidation = () => {
             if (username === "" || hasWhiteSpace(username)){
-                setSignupError({isError : true, errorType : "Invalid Username"})
-                return true;
-            }
-            else if(password === "" || hasWhiteSpace(password)){
-                setSignupError({isError : true, errorType : "Invalid Password"})
+                setSignupError({error : true, errorType : "Invalid Username"})
                 return true;
             }
             else if(name === ""){
-                setSignupError({isError : true, errorType : "No Name Sent"})
+                setSignupError({error : true, errorType : "No Name Sent"})
+                return true;
+            }
+            else if(password === "" || hasWhiteSpace(password)){
+                setSignupError({error : true, errorType : "Invalid Password"})
                 return true;
             }
             return false;
@@ -112,7 +111,7 @@ const SignupPage = (props) => {
 
         //if anything is not entered it should just fail
         const handleSignUp = () => {
-            setSignupError({isError : false, errorType : "none"})
+            setSignupError({error : false, errorType : "none"})
             if (userValidation() === true ) {
                 return
             }
@@ -123,16 +122,14 @@ const SignupPage = (props) => {
             }
             signUp(userData)
             .then(res => {
-                if (res.error === true)
-                {
-                    setSignupError({isError : true, errorType : res.errorType})
-                }
-                else{
-                    setSignupError({isError : false, errorType : "none"})
-                    setSignupComplete(true);
-                    //eventually this should just sign you in
-                    setTimeout(() => setSignup(false), 1000)
-                }
+                setSignupError({error : false, errorType : "none"})
+                setSignupComplete(true);
+                //eventually this should just sign you in
+                setTimeout(() => setSignup(false), 1000)
+            })
+            .catch(err => {
+                //handleServerErrors(err)
+                setSignupError({error: true, errorType: err.message})
             })
 
         }
@@ -162,7 +159,7 @@ const SignupPage = (props) => {
                 />   
             </div>
             <hr></hr>
-            {signupError.isError ? <Alert onClose = {() => {setSignupError({isError : false, errorType : "none"})}} severity="error">{signupError.errorType}</Alert> : <></>}
+            {signupError.error ? <Alert onClose = {() => {setSignupError({error : false, errorType : "none"})}} severity="error">{signupError.errorType}</Alert> : <></>}
             {signupComplete ? <Alert severity="success">Signup Successful</Alert> : 
             <div className="signupButtons">
                 <Button onClick = {handleCancel}>Cancel</Button>

@@ -23,14 +23,14 @@ export async function userLogin (username, password) {
 			headers: {
 			"Content-type": "application/json; charset=UTF-8"
 		}
-	})
-	.then((res => res.json()))
-    /*.then(res =>{             
-        if(!res.ok){
-            return serverErrorDecider(res)
-        }
-        return res.json()
-    })*/
+        })
+        //.then((res => res.json()))
+        .then(res =>{             
+            if(!res.ok){
+                return serverErrorDecider(res)
+            }
+            return res.json()
+        })
 	)
 }
 
@@ -42,8 +42,14 @@ export async function tokenLoginS (userID, token) {
 			"Content-type": "application/json; charset=UTF-8",
             "Authorization": "Bearer " + token
 		}
-	})
-	.then((res => res.json()))
+        })
+        //.then((res => res.json()))
+        .then(res =>{             
+            if(!res.ok){
+                return serverErrorDecider(res)
+            }
+            return res.json()
+        })
 	)
 }
 
@@ -54,7 +60,8 @@ used in SignUpPage.jsx
 ------------------------------------------------------------------------------------*/
 
 export async function signUp (userData) {
-    return (fetch(hostURL + "/signup", {
+    return (
+        fetch(hostURL + "/signup", {
         method: "POST",
         body: JSON.stringify({
             userData : userData
@@ -63,7 +70,14 @@ export async function signUp (userData) {
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
-    })
-    .then(res => res.json()))
+        })
+        //.then(res => res.json()))
+        .then(res =>{             
+            if(!res.ok){
+                return serverErrorDecider(res)
+            }
+            return res.json()
+        })
+    )
 }
 

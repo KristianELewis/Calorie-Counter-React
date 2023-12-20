@@ -1,3 +1,12 @@
+
+export class GeneralError extends Error {
+    constructor(message)
+    {
+        super(message)
+        this.name = "GeneralError"
+    }
+}
+
 export class UnauthorizedError extends Error {
     constructor(message)
     {
@@ -61,7 +70,11 @@ export async function serverErrorDecider(res){
     .catch(err => {
         errMessage = "There was an issue processing your request"
     })
-    if(res.status === 401)
+    if (res.status === 400)
+    {
+        throw new GeneralError(errMessage)
+    }
+    else if(res.status === 401)
     {
         throw new UnauthorizedError(errMessage)
     }
