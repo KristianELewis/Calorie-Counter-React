@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import Alert from '@mui/material/Alert';
 
 
-import { signUp } from "../serverFunctions/serverFunctions";
+import { signUp } from "../serverFunctions/loginSignupServerFunctions.js";
 
 import '../stylesheets/signup.css'
 
@@ -173,69 +173,3 @@ const SignupPage = (props) => {
 }
 
 export default SignupPage;
-
-
-//                <TextField onChange = {handlePasswordChange} required id = "password" type="password" label="Password" size="small" sx = {{marginTop:2}}/>
-
-
-
-
-/*
-old input fields
-
-<TextField 
-                    onChange = {handleUsernameChange} 
-                    required = {true}
-                    id = "signupUsername" 
-                    label="Username" 
-                    size="small" 
-                    margin = "normal"
-                />
-                <TextField 
-                    onChange = {handlePasswordChange} 
-                    required = {true}
-                    id = "signupPassword" 
-                    type="password" 
-                    label="Password" 
-                    size="small" 
-                    margin = "normal"
-                />
-                <TextField 
-                    onChange = {handleNameChange} 
-                    required = {true}
-                    id = "signupName" 
-                    type="name" 
-                    label="name" 
-                    size="small" 
-                    margin = "normal"
-                />
-                <TextField 
-                    onChange = {handleAgeChange} 
-                    required = {true}
-                    id = "signupAge" 
-                    type="age" 
-                    label="age" 
-                    size="small" 
-                    margin = "normal"
-                />
-                <TextField 
-                    onChange = {handleWeightChange} 
-                    required ={true}
-                    id = "signupWeight" 
-                    type="weight" 
-                    label="weight" 
-                    size="small" 
-                    margin = "normal"
-                />
-                */
-
-                            //will not be using these anytime soon. may end up deleting
-            /*
-            else if(age < 1 || isNaN(age)){
-                setSignupError({isError : true, errorType : "Invalid Age"})
-                return true;
-            }
-            else if(weight < 1 || isNaN(weight)){
-                setSignupError({isError : true, errorType : "Invalid Weight"})
-                return true;
-            }*/

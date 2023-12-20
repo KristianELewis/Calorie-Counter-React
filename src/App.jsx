@@ -36,7 +36,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 //server and cookie functions
-import { userLogin, tokenLoginS } from './serverFunctions/serverFunctions';
+import { userLogin, tokenLoginS } from './serverFunctions/loginSignupServerFunctions.js';
 import {getCookies, setCookies, removeCookies} from './serverFunctions/cookieUtilFunctions'
 
 import { widthContext } from './Contexts.js'
