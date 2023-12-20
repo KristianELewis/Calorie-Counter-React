@@ -1,6 +1,6 @@
 
-const hostURL = "http://localhost:3000"
-//const hostURL = "https://kristianlewis.com"
+//const hostURL = "http://localhost:3000"
+const hostURL = "https://kristianlewis.com"
 
 import {serverErrorDecider} from './customErrors'
 
