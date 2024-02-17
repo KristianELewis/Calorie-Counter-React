@@ -10,10 +10,8 @@ no auth needed
 used in AddFoodItem.jsx
 name should change, confused with AddMealItemServerFunc
 ------------------------------------------------------------------------------------*/
-//const hostURL = "http://localhost:3000"
-const hostURL = "https://kristianlewis.com/caloriecounter"
 
-import {serverErrorDecider} from './customErrors'
+import {serverErrorDecider, hostURL} from './customErrors'
 
 export async function addNewFoodItemConnect (name, brandName, servingSize, servingUnit, calories, carbs, fat, protein) {    
     return fetch(hostURL + "/database-food/new-item", {

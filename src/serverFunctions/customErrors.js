@@ -1,4 +1,8 @@
 
+
+//export const hostURL = "http://localhost:3000/caloriecounter";
+export const hostURL = "https://kristianlewis.com/caloriecounter"
+
 export class GeneralError extends Error {
     constructor(message)
     {

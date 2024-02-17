@@ -1,8 +1,4 @@
-
-//const hostURL = "http://localhost:3000"
-const hostURL = "https://kristianlewis.com/caloriecounter"
-
-import {serverErrorDecider} from './customErrors'
+import {serverErrorDecider, hostURL} from './customErrors'
 
 /*------------------------------------------------------------------------------------
 LOGIN
